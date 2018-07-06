@@ -52,6 +52,8 @@ ClientConfig.getInstance().configure("YOUR_API_KEY","YOUR_MERCHANT_ID",ClientCon
 ### App2App + Checkout
 The current tools allow you to use our CheckoutWidget ui component to display purchase information and a QR Code that represents the actual checkout.
 
+![Screenshot](screenshots/app2app.gif)
+
 ```xml
 <com.usekamba.kambapaysdk.ui.CheckoutWidget xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/checkout"
