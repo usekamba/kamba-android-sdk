@@ -34,6 +34,7 @@ public class KambaButton extends RelativeLayout {
     private static final String TRANSACTION_RECEIVER_FIRST_NAME = "transactionReceiverFirstName";
     private static final String TRANSACTION_AMOUNT = "amount";
     private static final String DESCRIPTION = "description";
+    private static final String WEBSITE = "https://www.usekamba.com/";
 
     public KambaButton(Context context) {
         super(context);
@@ -85,9 +86,15 @@ public class KambaButton extends RelativeLayout {
                 intent.putExtra(DESCRIPTION, checkoutResponse.getNotes());
                 context.startActivity(intent);
             } else {
-                intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse("market://details?id="+KAMBA_APP_PACKAGE));
-                context.startActivity(intent);
+                try {
+                    intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("market://details?id="+KAMBA_APP_PACKAGE));
+                    context.startActivity(intent);
+                } catch (ActivityNotFoundException e) {
+                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(WEBSITE));
+                    context.startActivity(intent);
+                }
+                
             }
 
         } else {
