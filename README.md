@@ -117,6 +117,7 @@ In the Activity that will host the CheckoutWidget do the following:
 
 ```java 
 public class CheckoutActivity extends AppCompatActivity {
+    CheckoutWidget checkoutWidget;
     ...
 
     @Override
