@@ -11,7 +11,6 @@ package com.usekamba.kambapaysdk.ui;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
-import android.content.pm.ResolveInfo;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -29,14 +28,12 @@ import android.widget.TextView;
 import com.usekamba.kambapaysdk.R;
 import com.usekamba.kambapaysdk.core.model.CheckoutResponse;
 
-import java.util.List;
-
 public class KambaButton extends RelativeLayout {
-    public static final String KAMBA_APP_PACKAGE = "com.usekamba.kamba.kamba";
-    public static final String TRANSACTION_RECEIVER_ID = "transactionReceiverId";
-    public static final String TRANSACTION_RECEIVER_FIRST_NAME = "transactionReceiverFirstName";
-    public static final String TRANSACTION_AMOUNT = "amount";
-    public static final String DESCRIPTION = "description";
+    private static final String KAMBA_APP_PACKAGE = "com.usekamba.kamba.kamba";
+    private static final String TRANSACTION_RECEIVER_ID = "transactionReceiverId";
+    private static final String TRANSACTION_RECEIVER_FIRST_NAME = "transactionReceiverFirstName";
+    private static final String TRANSACTION_AMOUNT = "amount";
+    private static final String DESCRIPTION = "description";
 
     public KambaButton(Context context) {
         super(context);
