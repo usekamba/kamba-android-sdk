@@ -36,7 +36,7 @@ Step 2. Add the dependency
 ```
 dependencies
     {
-	        implementation 'com.github.usekamba:kamba-android-sdk:v1.0-beta'
+	        implementation 'com.github.usekamba:kamba-android-sdk:v0.9.1'
     }
 ```
 
