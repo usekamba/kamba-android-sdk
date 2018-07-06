@@ -8,6 +8,7 @@
 
 package com.usekamba.kambapaysdk.ui;
 
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -75,7 +76,7 @@ public class KambaButton extends RelativeLayout {
         a.recycle();
     }
 
-    public void startWallet(CheckoutResponse checkoutResponse, Context context) {
+    public void payWithWallet(CheckoutResponse checkoutResponse, Context context) {
         if (checkoutResponse != null) {
             PackageManager packageManager = context.getPackageManager();
             Intent intent = packageManager.getLaunchIntentForPackage(KAMBA_APP_PACKAGE);
