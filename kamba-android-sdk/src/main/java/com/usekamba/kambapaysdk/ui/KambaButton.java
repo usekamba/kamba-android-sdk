@@ -58,7 +58,7 @@ public class KambaButton extends RelativeLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.KambaButton);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.KambaButton);
         View mRoot = inflate(context, R.layout.button, this);
         RelativeLayout mBackground = mRoot.findViewById(R.id.kamba_button_bg);
         TextView mText = mRoot.findViewById(R.id.kamba_button_text);
@@ -68,12 +68,12 @@ public class KambaButton extends RelativeLayout {
         Typeface font = ResourcesCompat.getFont(context, R.font.montserrat_bold);
         mText.setTypeface(font, Typeface.BOLD);
 
-        if (!a.getBoolean(R.styleable.KambaButton_lightTheme, true)) {
+        if (!attributes.getBoolean(R.styleable.KambaButton_lightTheme, true)) {
             mBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.button_dark_theme));
         } else {
             mBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.button));
         }
-        a.recycle();
+        attributes.recycle();
     }
 
     public void payWithWallet(CheckoutResponse checkoutResponse, Context context) {
