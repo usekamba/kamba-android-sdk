@@ -74,18 +74,28 @@ public class KambaButton extends RelativeLayout {
     }
 
     public void startWallet(CheckoutResponse checkoutResponse, Context context) {
-        Uri website = Uri.parse("https://www.usekamba.com");
-        Intent intent = new Intent(Intent.ACTION_VIEW, website);
-        intent.putExtra("transactionReceiverId", checkoutResponse.getMerchant().getId());
-        intent.putExtra("transactionReceiverFirstName", checkoutResponse.getMerchant().getBusiness_name());
-        intent.putExtra("amount", (checkoutResponse.getTotalAmount()).replace(".0", ""));
-        intent.putExtra("description", checkoutResponse.getNotes());
-        PackageManager packageManager = context.getPackageManager();
-        List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
-        boolean isIntentSafe = activities.size() > 0;
-        if (isIntentSafe) {
-            context.startActivity(intent);
+        if (checkoutResponse != null) {
+            Uri website = Uri.parse("https://www.usekamba.com");
+            Intent intent = new Intent(Intent.ACTION_VIEW, website);
+            intent.putExtra("transactionReceiverId", checkoutResponse.getMerchant().getId());
+            intent.putExtra("transactionReceiverFirstName", checkoutResponse.getMerchant().getBusiness_name());
+            intent.putExtra("amount", (checkoutResponse.getTotalAmount()).replace(".0", ""));
+            intent.putExtra("description", checkoutResponse.getNotes());
+            PackageManager packageManager = context.getPackageManager();
+            List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
+            boolean isIntentSafe = activities.size() > 0;
+            if (isIntentSafe) {
+                context.startActivity(intent);
+            } else {
+                website = Uri.parse("market://details?id=com.usekamba.kamba.kamba");
+                intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(website);
+                context.startActivity(intent);
+            }
+        } else {
+            throw new IllegalStateException();
         }
+
     }
 
 }
