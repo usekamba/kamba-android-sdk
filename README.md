@@ -91,7 +91,7 @@ public class MerchantActivity extends AppCompatActivity {
     checkoutRequest.setInitialAmount(36000.00);
     checkoutRequest.setNotes("Curso Android Para Visionários");
             CheckoutTransaction checkoutTransaction = new CheckoutTransactionBuilder().addCheckoutRequest(checkoutRequest)
-                    .addClientConfig(ClientConfig.getInstance()).buildCheckoutTransaction();
+                    .addClientConfig(ClientConfig.getInstance()).build();
             checkoutTransaction.enqueue(new TransactionCallback() {
                 @Override
                 public void onSuccess(CheckoutResponse checkoutResponse) {
