@@ -32,7 +32,11 @@ import com.usekamba.kambapaysdk.core.model.CheckoutResponse;
 import java.util.List;
 
 public class KambaButton extends RelativeLayout {
-
+    public static final String KAMBA_APP_PACKAGE = "com.usekamba.kamba.kamba";
+    public static final String TRANSACTION_RECEIVER_ID = "transactionReceiverId";
+    public static final String TRANSACTION_RECEIVER_FIRST_NAME = "transactionReceiverFirstName";
+    public static final String TRANSACTION_AMOUNT = "amount";
+    public static final String DESCRIPTION = "description";
 
     public KambaButton(Context context) {
         super(context);
@@ -75,23 +79,20 @@ public class KambaButton extends RelativeLayout {
 
     public void startWallet(CheckoutResponse checkoutResponse, Context context) {
         if (checkoutResponse != null) {
-            Uri website = Uri.parse("https://www.usekamba.com");
-            Intent intent = new Intent(Intent.ACTION_VIEW, website);
-            intent.putExtra("transactionReceiverId", checkoutResponse.getMerchant().getId());
-            intent.putExtra("transactionReceiverFirstName", checkoutResponse.getMerchant().getBusiness_name());
-            intent.putExtra("amount", (checkoutResponse.getTotalAmount()).replace(".0", ""));
-            intent.putExtra("description", checkoutResponse.getNotes());
             PackageManager packageManager = context.getPackageManager();
-            List<ResolveInfo> activities = packageManager.queryIntentActivities(intent, 0);
-            boolean isIntentSafe = activities.size() > 0;
-            if (isIntentSafe) {
+            Intent intent = packageManager.getLaunchIntentForPackage(KAMBA_APP_PACKAGE);
+            if (intent != null) {
+                intent.putExtra(TRANSACTION_RECEIVER_ID, checkoutResponse.getMerchant().getId());
+                intent.putExtra(TRANSACTION_RECEIVER_FIRST_NAME, checkoutResponse.getMerchant().getBusiness_name());
+                intent.putExtra(TRANSACTION_AMOUNT, (checkoutResponse.getTotalAmount()).replace(".0", ""));
+                intent.putExtra(DESCRIPTION, checkoutResponse.getNotes());
                 context.startActivity(intent);
             } else {
-                website = Uri.parse("market://details?id=com.usekamba.kamba.kamba");
                 intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(website);
+                intent.setData(Uri.parse("market://details?id="+KAMBA_APP_PACKAGE));
                 context.startActivity(intent);
             }
+
         } else {
             throw new IllegalStateException("CheckoutRespone must not be null");
         }
