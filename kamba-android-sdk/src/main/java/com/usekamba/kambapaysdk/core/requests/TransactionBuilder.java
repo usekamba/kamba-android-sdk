@@ -13,7 +13,7 @@ import com.usekamba.kambapaysdk.core.client.ClientConfig;
 class Transaction {
 
     public interface TransactionBuilder {
-        CheckoutTransaction buildCheckoutTransaction();
+        CheckoutTransaction build();
         CheckoutTransactionBuilder addCheckoutRequest(CheckoutRequest checkoutRequest);
         CheckoutTransactionBuilder addClientConfig(ClientConfig clientConfig);
     }

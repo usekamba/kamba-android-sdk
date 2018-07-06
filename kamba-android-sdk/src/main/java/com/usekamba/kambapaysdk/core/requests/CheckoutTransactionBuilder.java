@@ -62,7 +62,7 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
     }
 
     @Override
-    public CheckoutTransaction buildCheckoutTransaction() {
+    public CheckoutTransaction build() {
         setUpRequestAuthorization(clientConfig);
         CheckoutTransaction transaction = new CheckoutTransaction();
         transaction.setClient(client);
