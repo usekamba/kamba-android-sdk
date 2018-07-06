@@ -93,7 +93,7 @@ public class KambaButton extends RelativeLayout {
                 context.startActivity(intent);
             }
         } else {
-            throw new IllegalStateException();
+            throw new IllegalStateException("CheckoutRespone must not be null");
         }
 
     }
