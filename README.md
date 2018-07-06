@@ -1,9 +1,8 @@
 ## KAMBA-ANDROID-SDK
 
+[![](https://jitpack.io/v/usekamba/kamba-android-sdk.svg)](https://jitpack.io/#usekamba/kamba-android-sdk)
 
 Kamba-android-sdk makes it easy for developers and merchants to receive payments via Kamba Payment Systems.
-
-
 
 ## Current Payment Methods 
 As a merchant or developer you can currently use this sdk to receive payments via 
@@ -20,7 +19,24 @@ Create a Kamba Merchant account by contacting our support team. You will be give
 
 No need to clone the repository or download any files -- just add this line to your app's `build.gradle` inside the `dependencies` section:
 
-    coming soon!
+Step 1. Add the JitPack repository to your build file
+
+Add it in your root build.gradle at the end of repositories:
+```
+    allprojects {
+            repositories {
+                ...
+                maven { url 'https://jitpack.io' }
+            }
+    }
+```
+
+Step 2. Add the dependency
+
+```dependencies {
+	        implementation 'com.github.usekamba:kamba-android-sdk:v1.0-beta'
+	}
+```
 
 
 #### Set up Credentials
