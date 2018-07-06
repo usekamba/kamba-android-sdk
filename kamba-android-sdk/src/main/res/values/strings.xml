@@ -1,0 +1,14 @@
+<!--
+  ~ Copyright (C) UseKamba Ltda - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential and will be punished by law
+  ~ Written by Alexandre Antonio Juca <corextechnologies@gmail.com>
+  ~
+  -->
+
+<resources>
+    <string name="app_name">KambaSDK</string>
+    <string name="button_text">Pagar com Kamba</string>
+    <string name="valid_until">Válido até</string>
+    <string name="total">Total</string>
+</resources>

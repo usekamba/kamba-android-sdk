@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) Usekamba LDA - All Rights Reserved
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential
+  ~ Written by Alexandre Antonio Juca <corextechnologies@gmail.com>
+  -->
+
+<resources>
+    <color name="colorPrimary">#56e37f</color>
+    <color name="colorPrimaryDark">#4DCB72</color>
+    <color name="colorAccent">#4DCB72</color>
+    <color name="default_background">#f1f6f4</color>
+    <color name="primary_action">#2ce080</color>
+    <color name="light_green">#b3efcc</color>
+    <color name="text_color_white">#ffffff</color>
+    <color name="text_grey">#a6b0b2</color>
+    <color name="text_dark_grey">#223d49</color>
+    <color name="blue">#1775fc</color>
+    <color name="background">#000000</color>
+    <color name="IntroButton">#476EFA</color>
+    <color name="primaryText">#000000</color>
+    <color name="lessPrimaryText">#212121</color>
+    <color name="secondaaryText">#BDBDBD</color>
+    <color name="white">#ffffff</color>
+    <color name="light_grey">#F5F5F5</color>
+    <color name="white_translucent">#BBFFFFFF</color>
+    <color name="red">#EA4335</color>
+    <color name="movicel_red">#fb0d1c</color>
+    <color name="grey_standard">#919191</color>
+    <color name="unitel">#e26612</color>
+    <color name="disable">#dddddd</color>
+</resources>

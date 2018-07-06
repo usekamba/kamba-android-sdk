@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  ~ Copyright (C) UseKamba Ltda - All Rights ReservedcardElevation
+  ~ Unauthorized copying of this file, via any medium is strictly prohibited
+  ~ Proprietary and confidential and will be punished by law
+  ~ Written by Alexandre Antonio Juca <corextechnologies@gmail.com>
+  ~
+  -->
+
+<resources>
+    <declare-styleable name="KambaButton">
+        <attr name="lightTheme" format="boolean" />
+    </declare-styleable>
+
+    <declare-styleable name="CheckoutWidget">
+        <attr name="cardCornerRadius" format="dimension" />
+        <attr name="cardElevation" format="dimension" />
+    </declare-styleable>
+
+</resources>
