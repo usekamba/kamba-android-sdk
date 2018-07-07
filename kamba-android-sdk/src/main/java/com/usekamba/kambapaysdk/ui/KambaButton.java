@@ -12,6 +12,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.content.res.TypedArray;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -28,6 +29,8 @@ import android.widget.TextView;
 
 import com.usekamba.kambapaysdk.R;
 import com.usekamba.kambapaysdk.core.model.CheckoutResponse;
+
+import java.util.List;
 
 public class KambaButton extends RelativeLayout {
     private static final String KAMBA_APP_PACKAGE = "com.usekamba.kamba.kamba";
