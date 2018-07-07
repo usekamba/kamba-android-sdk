@@ -7,25 +7,9 @@
 
 <resources>
     <!-- Default screen margins, per the Android Design guidelines. -->
-    <dimen name="activity_horizontal_margin">16dp</dimen>
-    <dimen name="activity_vertical_margin">16dp</dimen>
-    <dimen name="btn_height">48dp</dimen>
+    <dimen name="kamba_res_btn_height">48dp</dimen>
     // Button roundness
-    <dimen name="layer_padding">4dp</dimen>
-    <dimen name="corner_radius">4dp</dimen>
-    <dimen name="btn_padding">80dp</dimen>
-    <dimen name="app_activity_title">22sp</dimen>
-    <dimen name="app_activity_description">16sp</dimen>
-    <dimen name="input_font_size">16sp</dimen>
-    <dimen name="fab_margin">16dp</dimen>
-    <dimen name="slide_font_size">22sp</dimen>
-    <dimen name="in_fragment_title">22sp</dimen>
-    <dimen name="in_fragment_explanatory_text">16sp</dimen>
-    <dimen name="layout_margin_vertical">32dp</dimen>
-    <dimen name="layout_margin_horizontal">16dp</dimen>
-    <dimen name="margin_medium">16dp</dimen>
-    <dimen name="bank_value_size">12sp</dimen>
-    <dimen name="spacing">160sp</dimen>
-    <dimen name="font_size">16sp</dimen>
-    <dimen name="horizontal_spacing">12sp</dimen>
+    <dimen name="kamba_res_layer_padding">4dp</dimen>
+    <dimen name="kamba_res_corner_radius">4dp</dimen>
+    <dimen name="kamba_res_btn_padding">80dp</dimen>
 </resources>

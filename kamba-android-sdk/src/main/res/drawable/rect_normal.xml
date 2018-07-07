@@ -6,13 +6,15 @@
   ~ Written by Alexandre Antonio Juca <corextechnologies@gmail.com>
   -->
 
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="ResourceName">
     <item android:drawable="@drawable/rect_pressed" />
 
-    <item android:bottom="@dimen/layer_padding">
+    <item android:bottom="@dimen/kamba_res_layer_padding">
         <shape android:shape="rectangle">
-            <corners android:radius="@dimen/corner_radius" />
-            <solid android:color="@color/primary_action" />
+            <corners android:radius="@dimen/kamba_res_corner_radius" />
+            <solid android:color="@color/kamba_resprimary_action" />
         </shape>
     </item>
 </layer-list>

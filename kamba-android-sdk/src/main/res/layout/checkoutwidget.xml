@@ -11,7 +11,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    tools:ignore="ResourceName">
 
     <android.support.constraint.ConstraintLayout
         android:id="@+id/background"
@@ -78,7 +79,7 @@
                     android:layout_marginStart="8dp"
                     android:fontFamily="@font/roboto"
                     android:gravity="center"
-                    android:text="@string/valid_until"
+                    android:text="@string/kamba_res_valid_until"
                     android:textSize="12sp"
                     android:textStyle="bold"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -107,7 +108,7 @@
             android:layout_marginTop="32dp"
             android:adjustViewBounds="true"
             android:background="@drawable/security_checked"
-            android:backgroundTint="@color/colorPrimary"
+            android:backgroundTint="@color/kamba_res_colorPrimary"
             android:cropToPadding="true"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
@@ -123,7 +124,7 @@
             android:fontFamily="@font/roboto"
             android:gravity="center_horizontal|center"
             android:text="Pagamento seguro"
-            android:textColor="@color/colorAccent"
+            android:textColor="@color/kamba_rescolorAccent"
             app:layout_constraintBottom_toTopOf="@+id/checkout_payment_details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -151,7 +152,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:background="@color/light_grey"
+            android:background="@color/kamba_reslight_grey"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/checkout_payment_details" />
@@ -174,7 +175,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_weight="1.0"
-                android:divider="@color/light_grey">
+                android:divider="@color/kamba_reslight_grey">
 
                 <TextView
                     android:id="@+id/checkout_item_description"
@@ -206,7 +207,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:background="@color/light_grey"
+            android:background="@color/kamba_reslight_grey"
             android:padding="8dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -219,7 +220,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
-                android:text="@string/total"
+                android:text="@string/kamba_res_total"
                 android:textColor="@android:color/black"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/imageView"

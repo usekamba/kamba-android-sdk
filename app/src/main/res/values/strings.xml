@@ -7,5 +7,5 @@
   -->
 
 <resources>
-    <string name="app_name">Kamba-Payments-Sdk</string>
+    <string name="kamba_res_app_name">Kamba-Payments-Sdk</string>
 </resources>

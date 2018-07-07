@@ -67,7 +67,7 @@ public class KambaButton extends RelativeLayout {
         TextView mText = mRoot.findViewById(R.id.kamba_button_text);
         ImageView mLogo = mRoot.findViewById(R.id.kamba_logo);
 
-        mText.setText(R.string.button_text);
+        mText.setText(R.string.kamba_res_button_text);
         Typeface font = ResourcesCompat.getFont(context, R.font.montserrat_bold);
         mText.setTypeface(font, Typeface.BOLD);
 

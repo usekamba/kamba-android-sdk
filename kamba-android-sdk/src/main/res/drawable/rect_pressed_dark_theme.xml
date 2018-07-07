@@ -9,7 +9,9 @@
   -->
 
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
-    android:shape="rectangle">
-    <corners android:radius="@dimen/corner_radius" />
-    <solid android:color="@color/light_grey" />
+    xmlns:tools="http://schemas.android.com/tools"
+    android:shape="rectangle"
+    tools:ignore="ResourceName">
+    <corners android:radius="@dimen/kamba_res_corner_radius" />
+    <solid android:color="@color/kamba_reslight_grey" />
 </shape>

@@ -7,7 +7,7 @@
   ~
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" tools:ignore="ResourceName">
     <item android:state_pressed="true" android:drawable="@drawable/rect_pressed_dark_theme"/>
     <item android:drawable="@drawable/rect_normal_dark_theme"/>
 </selector>

@@ -6,7 +6,7 @@
   ~ Written by Alexandre Antonio Juca <corextechnologies@gmail.com>
   -->
 
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
+<selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" tools:ignore="ResourceName">
     <item android:state_pressed="false" android:drawable="@drawable/qr_back_pressed"/>
     <item android:drawable="@drawable/qr_back_normal"/>
 </selector>

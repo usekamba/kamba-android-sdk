@@ -7,12 +7,14 @@
   ~
   -->
 
-<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+<layer-list xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    tools:ignore="ResourceName">
     <item android:drawable="@drawable/qr_back_pressed"></item>
-    <item android:bottom="@dimen/layer_padding">
+    <item android:bottom="@dimen/kamba_res_layer_padding">
         <shape android:shape="rectangle">
-            <corners android:radius="@dimen/corner_radius" />
-            <solid android:color="@color/light_grey" />
+            <corners android:radius="@dimen/kamba_res_corner_radius" />
+            <solid android:color="@color/kamba_reslight_grey" />
         </shape>
     </item>
 </layer-list>

@@ -13,9 +13,6 @@ group='com.github.usekamba'
 
 android {
     compileSdkVersion 27
-
-
-    resourcePrefix 'kamba_res'
     defaultConfig {
         minSdkVersion 17
         targetSdkVersion 27

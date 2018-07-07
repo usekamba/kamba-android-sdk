@@ -8,5 +8,5 @@
   -->
 
 <resources>
-    <public type="drawable" name="cheap"/>
+    <public type="drawable" name="kamba_res_cheap"/>
 </resources>

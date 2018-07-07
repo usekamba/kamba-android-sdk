@@ -7,27 +7,27 @@
   -->
 
 <resources>
-    <color name="colorPrimary">#56e37f</color>
-    <color name="colorPrimaryDark">#4DCB72</color>
-    <color name="colorAccent">#4DCB72</color>
-    <color name="default_background">#f1f6f4</color>
-    <color name="primary_action">#2ce080</color>
-    <color name="light_green">#b3efcc</color>
-    <color name="text_color_white">#ffffff</color>
-    <color name="text_grey">#a6b0b2</color>
-    <color name="text_dark_grey">#223d49</color>
-    <color name="blue">#1775fc</color>
-    <color name="background">#000000</color>
-    <color name="IntroButton">#476EFA</color>
-    <color name="primaryText">#000000</color>
-    <color name="lessPrimaryText">#212121</color>
-    <color name="secondaaryText">#BDBDBD</color>
-    <color name="white">#ffffff</color>
-    <color name="light_grey">#F5F5F5</color>
-    <color name="white_translucent">#BBFFFFFF</color>
-    <color name="red">#EA4335</color>
-    <color name="movicel_red">#fb0d1c</color>
-    <color name="grey_standard">#919191</color>
-    <color name="unitel">#e26612</color>
-    <color name="disable">#dddddd</color>
+    <color name="kamba_res_colorPrimary">#56e37f</color>
+    <color name="kamba_rescolorPrimaryDark">#4DCB72</color>
+    <color name="kamba_rescolorAccent">#4DCB72</color>
+    <color name="kamba_resdefault_background">#f1f6f4</color>
+    <color name="kamba_resprimary_action">#2ce080</color>
+    <color name="kamba_reslight_green">#b3efcc</color>
+    <color name="kamba_restext_color_white">#ffffff</color>
+    <color name="kamba_restext_grey">#a6b0b2</color>
+    <color name="kamba_restext_dark_grey">#223d49</color>
+    <color name="kamba_resblue">#1775fc</color>
+    <color name="kamba_resbackground">#000000</color>
+    <color name="kamba_resIntroButton">#476EFA</color>
+    <color name="kamba_resprimaryText">#000000</color>
+    <color name="kamba_reslessPrimaryText">#212121</color>
+    <color name="kamba_ressecondaaryText">#BDBDBD</color>
+    <color name="kamba_reswhite">#ffffff</color>
+    <color name="kamba_reslight_grey">#F5F5F5</color>
+    <color name="kamba_reswhite_translucent">#BBFFFFFF</color>
+    <color name="kamba_resred">#EA4335</color>
+    <color name="kamba_resmovicel_red">#fb0d1c</color>
+    <color name="kamba_resgrey_standard">#919191</color>
+    <color name="kamba_resunitel">#e26612</color>
+    <color name="kamba_resdisable">#dddddd</color>
 </resources>
