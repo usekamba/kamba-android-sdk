@@ -2,6 +2,7 @@
 
 [![](https://jitpack.io/v/usekamba/kamba-android-sdk.svg)](https://jitpack.io/#usekamba/kamba-android-sdk)
 
+
 Kamba-android-sdk makes it easy for developers and merchants to receive payments via Kamba Payment Systems.
 
 ## Current Payment Methods 
@@ -36,7 +37,7 @@ Step 2. Add the dependency
 ```
 dependencies
     {
-	        implementation 'com.github.usekamba:kamba-android-sdk:v0.9.1'
+	        implementation 'com.github.usekamba:kamba-android-sdk:v0.9.2'
     }
 ```
 
