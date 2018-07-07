@@ -79,23 +79,25 @@ public class KambaButton extends RelativeLayout {
     public void payWithWallet(CheckoutResponse checkoutResponse, Context context) {
         if (checkoutResponse != null) {
             PackageManager packageManager = context.getPackageManager();
-            Intent intent = packageManager.getLaunchIntentForPackage(KAMBA_APP_PACKAGE);
-            if (intent != null) {
-                intent.putExtra(TRANSACTION_RECEIVER_ID, checkoutResponse.getMerchant().getId());
-                intent.putExtra(TRANSACTION_RECEIVER_FIRST_NAME, checkoutResponse.getMerchant().getBusiness_name());
-                intent.putExtra(TRANSACTION_AMOUNT, (checkoutResponse.getTotalAmount()).replace(".0", ""));
-                intent.putExtra(DESCRIPTION, checkoutResponse.getNotes());
-                context.startActivity(intent);
+            Intent walletIntent = new Intent(Intent.ACTION_VIEW);
+            walletIntent.setData(Uri.parse("checkout://com.usekamba"));
+            List<ResolveInfo> activities = packageManager.queryIntentActivities(walletIntent, 0);
+            boolean isIntentSafe = activities.size() > 0;
+            if (isIntentSafe) {
+                walletIntent.putExtra(TRANSACTION_RECEIVER_ID, checkoutResponse.getMerchant().getId());
+                walletIntent.putExtra(TRANSACTION_RECEIVER_FIRST_NAME, checkoutResponse.getMerchant().getBusiness_name());
+                walletIntent.putExtra(TRANSACTION_AMOUNT, (checkoutResponse.getTotalAmount()).replace(".0", ""));
+                walletIntent.putExtra(DESCRIPTION, checkoutResponse.getNotes());
+                context.startActivity(walletIntent);
             } else {
                 try {
-                    intent = new Intent(Intent.ACTION_VIEW);
-                    intent.setData(Uri.parse("market://details?id="+KAMBA_APP_PACKAGE));
-                    context.startActivity(intent);
+                    walletIntent = new Intent(Intent.ACTION_VIEW);
+                    walletIntent.setData(Uri.parse("market://details?id="+KAMBA_APP_PACKAGE));
+                    context.startActivity(walletIntent);
                 } catch (ActivityNotFoundException e) {
-                    intent = new Intent(Intent.ACTION_VIEW, Uri.parse(WEBSITE));
-                    context.startActivity(intent);
+                    walletIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(WEBSITE));
+                    context.startActivity(walletIntent);
                 }
-                
             }
 
         } else {
