@@ -1,57 +1,56 @@
-## KAMBA-ANDROID-SDK
+## Guia de Integração SDK Android
 
 [![](https://jitpack.io/v/usekamba/kamba-android-sdk.svg)](https://jitpack.io/#usekamba/kamba-android-sdk)
 
 
-Kamba-android-sdk makes it easy for developers and merchants to receive payments via Kamba Payment Systems.
+Facilita aos comerciantes receber pagamentos com os meios de pagamentos das Apis da Kamba Soluções Pagamentos.
 
-## Current Payment Methods 
-As a merchant or developer you can currently use this sdk to receive payments via 
-1. QR-code (Useful for developers who desire in-store payments, or in-locale payments like ticket sales etc) 
-2. App2App in which your app redirects payments to the users Kamba Wallet installed on the customers device to complete transactions. 
+## Métodos de pagamentos atuais
+1. **Pagamento via QR** com um código de pagamento (útil para comerciantes com ponto físico que desejam digitalizar os pagamentos do seu negócio ou para organizadores de eventos para vendas de ingressos, etc, o código pode ser impresso ou enviado para diversos canais sóciais). 
+2. **App2App** em que seu aplicativo finaliza os pagamentos abrindo à carteira instalada no dispositivo dos clientes para concluir os pagamentos. 
 
-## Initial Setup
-Create a Kamba Merchant account by contacting our support team. You will be given an apiKey and a merchant id for testing this library in SANDBOX mode. 
-> NOTE: The KAMBA-ANDROID-SDK is in beta and still under developement. If you find any error create an issue so it can be seen to as soon as possible.
+> **Nota:** Em ambos você acompanha os estados do pagamento, recebe notificações por e-mail, push quando pagamentos são bem sucedidos. E pode ainda controlar todos seus pagamentos com o aplicativo para Comerciantes ou o Painel Web.
 
-## Installation
+## Configuração inicial
+Crie uma conta Comerciante connosco entrando em contato com nossa equipe de suporte. Você receberá uma `api_key` e um identificador de comerciante `mID`  para testar a biblioteca no modo SANDBOX. Você terá ainda acesso ao App Comerciante e ao Painel Web para adiministração e controle dos seus pagamentos e clientes.
 
-### Android Studio (or Gradle)
+> Nota: Esta biblioteca está em fase beta e em desenvolvimento contínuo. Se você encontrar algum erro, crie uma issue para que ela seja corrigida o mais rápido possível.
 
-No need to clone the repository or download any files -- just add this line to your app's `build.gradle` inside the `dependencies` section:
+## Instalação
 
-Step 1. Add the JitPack repository to your build file
+### Android Studio (ou Gradle)
 
-Add it in your root build.gradle at the end of repositories:
+Não há necessidade de clonar o repositório ou baixar arquivos para sua máquina - basta adicionar as linhas de código à baixo ao `build.gradle` do seu aplicativo dentro da seção` dependencies`:
+
+**Passo 1:** Inclua o repositório JitPack em seu arquivo de construção. Adicione-o em sua raiz `build.gradle` no final dos repositórios.
 ```
-    allprojects {
-            repositories {
-                ...
-                maven { url 'https://jitpack.io' }
-            }
+allprojects {
+    repositories {
+	...
+	maven { url 'https://jitpack.io' }
     }
+}
 ```
 
-Step 2. Add the dependency
+**Passo 2:** Adicione a dependência.
 
 ```
 dependencies
-    {
-	        implementation 'com.github.usekamba:kamba-android-sdk:v0.9.2'
-    }
+{
+	implementation 'com.github.usekamba:kamba-android-sdk:v0.9.2'
+}
 ```
 
-
-#### Set up Credentials
-It is important to set up your credentials so that our systems can authenticate your payment requests.
-Usually you will do this in the Activity that will display the payment method. This code will run after your user selects the Kamba Payment option. 
+#### Configurar credenciais
+É importante configurar suas credenciais para que nossos sistemas possam autenticar suas solicitações de pagamento.
+Normalmente, você fará isso na `Activity` que exibirá o método de pagamento para seu aplicativo. Este código será executado após o usuário selecionar a opção de pagamento `Pagar com o Kamba`.
 
 ```java
 ClientConfig.getInstance().configure("YOUR_API_KEY","YOUR_MERCHANT_ID",ClientConfig.Environment.SANDBOX);
 ```
-## Usage
-### App2App + Checkout
-The current tools allow you to use our CheckoutWidget ui component to display purchase information and a QR Code that represents the actual checkout.
+
+## Implementação
+As ferramentas atuais permitem que você use nossos componentes de UI como **Botão de pagamento, tela Checkout, e código QR de pagamento** para exibir as informações para a finalização da compra pelo cliente, seja digitalizando o código QR ou finalizando o pagamento com a sua Carteira. 
 
 ![Screenshot](screenshots/appToapp.gif)
 
@@ -68,7 +67,7 @@ The current tools allow you to use our CheckoutWidget ui component to display pu
 
 ```
 
-We have also created a KambaButton that your users will click to accept app2app payments. Clicking on this button will redirect the user to his/her Kamba digital wallet to complete transaction.
+Também criamos um botão de Pagamento para que seus clientes cliquem para aceitar pagamentos via Carteira. Clicar neste botão abrirá a Carteira do cliente para finalizar o pagamento.
 
 ```xml
 <com.usekamba.kambapaysdk.ui.KambaButton
@@ -82,11 +81,11 @@ We have also created a KambaButton that your users will click to accept app2app 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-    </com.usekamba.kambapaysdk.ui.KambaButton>
+</com.usekamba.kambapaysdk.ui.KambaButton>
 ```
-You can add both of them in the same layout to show the CheckoutWidget containing the checkout details in the same screen as well as provide the KambaButton for App2App payments.
+Você pode adicionar os dois componentes no mesmo layout para mostrar o **widget Checkout** que contém os detalhes de pagamento na mesma tela em conjunto com a opção **botão de Pagamento**, dando assim aos seus clientes à escolha para melhor opção de pagamento no seu contexto.
 
-Create an instance of the CheckoutRequest object that represents the item your user has selected to purchase. Add the price and description as necessary. The CheckoutTransaction object will asynchronously make a call to our systems and trigger a callback and return a CheckoutResponse object that your CheckoutWidget requires to populate itself. In the onSuccess callback start the activity that will show the CheckoutWidget and the KambaButton.
+Crie uma instância do objeto `CheckoutRequest` que representa o item que seu cliente selecionou para comprar. Adicione o preço e a descrição conforme necessário. O objeto `CheckoutTransaction` enviará uma solicitação de forma assíncrona para os nossos sistemas que retornará um objeto `CheckoutResponse` que seu `CheckoutWidget` preencherá com as demoais informações. No retorno de chamada `onSuccess`, inicie a atividade que mostrará o `CheckoutWidget` e o `KambaButton`.
 ```java
 public class MerchantActivity extends AppCompatActivity {
     ...
@@ -114,7 +113,7 @@ public class MerchantActivity extends AppCompatActivity {
             
 ```
 
-In the Activity that will host the CheckoutWidget do the following:
+Na Activity que mostrará o `CheckoutWidget`, faça o seguinte:
 
 ```java 
 public class CheckoutActivity extends AppCompatActivity {
