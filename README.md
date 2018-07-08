@@ -1,11 +1,22 @@
-## Guia de Integração SDK Android
+## Guia de Integração da Biblioteca Checkout App2App Android
 
 [![](https://jitpack.io/v/usekamba/kamba-android-sdk.svg)](https://jitpack.io/#usekamba/kamba-android-sdk)
 
+Ofereça pagamentos de produtos ou serviços em seu aplicativo de forma nativa para Android.
 
-Facilita aos comerciantes receber pagamentos com os meios de pagamentos das Apis da Kamba Soluções Pagamentos.
+Com uma única integração, seus clientes poderão realizar pagamentos com a sua carteira via código QR de pagamento ou Botão de pagamento, além de utilizarem seus dados cadastrados para futuras compras em 2 cliques. Notificação para lembretes de finalização de compra, levantamento da quantia para sua conta bancária em até 72 horas e muito mais benefícios técnicos e de negócios à longo termo.
 
-## Métodos de pagamentos atuais
+> A autenticação deve ser feita com as suas credenciais de conta Comerciante. Veja mais sobre os tipos de credenciais em [Autenticação](https://docs.usekamba.com/#autenticacao).
+
+**Atenção:**
+> O Checkout App2App está em fase beta. Para fazer parte desta fase você precisa seguir alguns passos antes:
+
+- Enviar um e-mail para suporte@usekamba.com informando um telefone de contato e o e-mail para a sua conta Comerciante.
+- Assim que possível, nossa equipa entrará em contato com você para obter mais informações e liberar a funcionalidade para a sua conta Comerciante.
+
+Assim que você implementar o Checkout App2App em sua aplicação, envie o link para seu App Android na Google Play Store e até mesmo feedback para a nossa equipa. Nesta fase de implementação a sua opinião é extremamente importante.
+
+## Formas atuais de pagamento
 1. **Pagamento via QR** com um código de pagamento (útil para comerciantes com ponto físico que desejam digitalizar os pagamentos do seu negócio ou para organizadores de eventos para vendas de ingressos, etc, o código pode ser impresso ou enviado para diversos canais sóciais). 
 2. **App2App** em que seu aplicativo finaliza os pagamentos abrindo à carteira instalada no dispositivo dos clientes para concluir os pagamentos. 
 
