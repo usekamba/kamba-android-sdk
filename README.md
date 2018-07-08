@@ -151,3 +151,9 @@ public class CheckoutActivity extends AppCompatActivity {
     }
 }
 ```
+
+## Histórico de versões
+0.0.1: Melhorias e correção de bugs - 07/07/2018
+
+
+© 2018 Soluções de Pagamento. Todos os direitos reservados. USEKAMBA, LDA. - Rua Avenida Manuel Vandunem, Ingombotas - Luanda - Angola
