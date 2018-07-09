@@ -52,12 +52,22 @@ dependencies
 }
 ```
 
+**Passo 3: Adicionar permisão para Internet
+```
+    <uses-permission android:name="android.permission.INTERNET"></uses-permission>
+```
 #### Configurar credenciais
 É importante configurar suas credenciais para que nossos sistemas possam autenticar suas solicitações de pagamento.
 Normalmente, você fará isso na `Activity` que exibirá o método de pagamento para seu aplicativo. Este código será executado após o usuário selecionar a opção de pagamento `Pagar com o Kamba`.
 
+** Durante a fase de desenvolvimento será necessário usar o sdk em ambiente SANDBOX.
 ```java
-ClientConfig.getInstance().configure("YOUR_API_KEY","YOUR_MERCHANT_ID",ClientConfig.Environment.SANDBOX);
+ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID",ClientConfig.Environment.SANDBOX);
+```
+
+** Depois de testar o teu app, será necessário usar o sdk em ambiente production para receber dinheiro online. Certifica sempre que estás a usar os credencias designadas para uso em modo production antes de criar um APK em release. 
+```java
+ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID",ClientConfig.Environment.PRODUCTION);
 ```
 
 ## Implementação
@@ -67,10 +77,7 @@ As ferramentas atuais permitem que você use nossos componentes de UI como **Bot
 <com.usekamba.kambapaysdk.ui.CheckoutWidget xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/checkout"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="wrap_content">
 
 </com.usekamba.kambapaysdk.ui.CheckoutWidget>
 
@@ -81,14 +88,11 @@ Também criamos um botão de Pagamento para que seus clientes cliquem para aceit
 ```xml
 <com.usekamba.kambapaysdk.ui.KambaButton
         android:id="@+id/pay"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="52dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_marginStart="8dp">
 
 </com.usekamba.kambapaysdk.ui.KambaButton>
 ```
@@ -135,7 +139,7 @@ public class CheckoutActivity extends AppCompatActivity {
         setContentView(R.layout.activity_checkout);
         checkoutWidget = findViewById(R.id.checkout);
         payButton = findViewById(R.id.pay);
-
+        // Para acessar o checkout response da tela anterior usa sempre response "(CheckoutResponse) getIntent().getSerializableExtra("checkout");
         response = (CheckoutResponse) getIntent().getSerializableExtra("checkout");
         checkoutWidget.setAmount(Double.parseDouble(checkoutResponse.getTotalAmount()));
         checkoutWidget.setExpirationDate("22/09/2018 13:58");
