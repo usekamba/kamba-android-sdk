@@ -60,12 +60,12 @@ dependencies
 É importante configurar suas credenciais para que nossos sistemas possam autenticar suas solicitações de pagamento.
 Normalmente, você fará isso na `Activity` que exibirá o método de pagamento para seu aplicativo. Este código será executado após o usuário selecionar a opção de pagamento `Pagar com o Kamba`.
 
-** Durante a fase de desenvolvimento será necessário usar o sdk em ambiente SANDBOX.
+**NOTA:** Durante a fase de desenvolvimento será necessário usar o sdk em ambiente SANDBOX.
 ```java
 ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID",ClientConfig.Environment.SANDBOX);
 ```
 
-** Depois de testar o teu app, será necessário usar o sdk em ambiente production para receber dinheiro online. Certifica sempre que estás a usar os credencias designadas para uso em modo production antes de criar um APK em release. 
+**NOTA:** Depois de testar o teu app, será necessário usar o sdk em ambiente production para receber dinheiro online. Certifica sempre que estás a usar os credencias designadas para uso em modo production antes de criar um APK em release. 
 ```java
 ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID",ClientConfig.Environment.PRODUCTION);
 ```
