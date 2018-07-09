@@ -48,7 +48,7 @@ allprojects {
 ```
 dependencies
 {
-	implementation 'com.github.usekamba:kamba-android-sdk:v0.9.2'
+	implementation 'com.github.usekamba:kamba-android-sdk:v0.9.3'
 }
 ```
 
