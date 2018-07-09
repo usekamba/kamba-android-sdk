@@ -29,7 +29,7 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
     private void setUpRequestAuthorization(ClientConfig clientConfig) {
         if (clientConfig.getEnvironment() == ClientConfig.Environment.SANDBOX) {
             RequestBody requestBody = RequestBody.create(mediaType, checkoutRequestJsonAdapter.toJson(checkoutRequest));
-            String API_SANDBOX_URL = "https://kamba-api-staging.herokuapp.com/v1/checkouts";
+            String API_SANDBOX_URL = "https://sandbox.usekamba.com/v1/checkouts";
             request = new Request.Builder().url(API_SANDBOX_URL)
                     .header("User-Agent", "SDK")
                     .addHeader("Authorization", "Token " + clientConfig.getApiKey())

@@ -29,7 +29,6 @@ public class CheckoutTransaction {
     private final Moshi moshi = new Moshi.Builder().build();
     private final JsonAdapter<CheckoutResponse> checkoutResponseJsonAdapter = moshi.adapter(CheckoutResponse.class);
     private TransactionCallback callback;
-    private final Platform platform = new Platform();
 
     void setClient(OkHttpClient client) {
         this.client = client;
