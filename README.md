@@ -52,7 +52,7 @@ dependencies
 }
 ```
 
-**Passo 3:** Adicionar permisão para Internet
+**Passo 3:** Adicione a permissão para Internet.
 ```
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 ```
