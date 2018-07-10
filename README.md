@@ -73,7 +73,7 @@ ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID",Clien
 ## Implementação
 As ferramentas atuais permitem que você use nossos componentes de UI como **Botão de pagamento, tela Checkout, e código QR de pagamento** para exibir as informações para a finalização da compra pelo cliente, seja digitalizando o código QR ou finalizando o pagamento com a sua Carteira. 
 
-[Screenshot](screenshots/kamba_widget.png)
+![Screenshot](screenshots/kamba_widget.png)
 
 ```xml
 <com.usekamba.kambapaysdk.ui.CheckoutWidget xmlns:android="http://schemas.android.com/apk/res/android"
