@@ -54,7 +54,7 @@ dependencies
 }
 ```
 
-**Passo 3:** Adicionar permisão para Internet
+**Passo 3:** Adicione a permissão para Internet.
 ```
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 ```
@@ -67,15 +67,8 @@ Normalmente, você fará isso na `Activity` que exibirá o método de pagamento 
 ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID",ClientConfig.Environment.SANDBOX);
 ```
 
-**NOTA:** Depois de testar o teu app, será necessário usar o sdk em ambiente production para receber dinheiro online. Certifica sempre que estás a usar os credencias designadas para uso em modo production antes de criar um APK em release. 
-```java
-ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID",ClientConfig.Environment.PRODUCTION);
-```
-
 ## Implementação
 As ferramentas atuais permitem que você use nossos componentes de UI como **Botão de pagamento, tela Checkout, e código QR de pagamento** para exibir as informações para a finalização da compra pelo cliente, seja digitalizando o código QR ou finalizando o pagamento com a sua Carteira. 
-
-![Screenshot](screenshots/kamba_widget.png)
 
 ```xml
 <com.usekamba.kambapaysdk.ui.CheckoutWidget xmlns:android="http://schemas.android.com/apk/res/android"
