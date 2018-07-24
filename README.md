@@ -6,6 +6,8 @@ Ofereça pagamentos de produtos ou serviços em seu aplicativo de forma nativa p
 
 Com uma única integração, seus clientes poderão realizar pagamentos com a sua carteira via código QR de pagamento ou Botão de pagamento, além de utilizarem seus dados cadastrados para futuras compras em 2 cliques. Notificação para lembretes de finalização de compra, levantamento da quantia para sua conta bancária em até 72 horas e muito mais benefícios técnicos e de negócios à longo termo.
 
+![Screenshot](/screenshots/kamba_widget.png)
+
 > A autenticação deve ser feita com as suas credenciais de conta Comerciante. Veja mais sobre os tipos de credenciais em [Autenticação](https://docs.usekamba.com/#autenticacao).
 
 **Atenção:**
