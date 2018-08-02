@@ -64,7 +64,7 @@ Normalmente, você fará isso na `Activity` que exibirá o método de pagamento 
 
 **NOTA:** Durante a fase de desenvolvimento será necessário usar o sdk em ambiente SANDBOX.
 ```java
-ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID",ClientConfig.Environment.SANDBOX);
+ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID", ClientConfig.Environment.SANDBOX);
 ```
 
 ## Implementação
@@ -151,8 +151,14 @@ public class CheckoutActivity extends AppCompatActivity {
 }
 ```
 
+**NOTA:** Se tudo está funcionando bem em modo SANDBOX e o seu aplicativo está pronto para RELEASE altera o 
+ambiente para production.
+```java
+ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID", ClientConfig.Environment.PRODUCTION);
+```
+
 ## Histórico de versões
-0.0.1: Melhorias e correção de bugs - 07/07/2018
+0.9.3: Melhorias e correção de bugs - 07/07/2018
 
 
 © 2018 Soluções de Pagamento. Todos os direitos reservados. USEKAMBA, LDA. - Rua Avenida Manuel Vandunem, Ingombotas - Luanda - Angola
