@@ -151,8 +151,8 @@ public class CheckoutActivity extends AppCompatActivity {
 }
 ```
 
-**NOTA:** Se tudo está funcionando bem em modo SANDBOX e o seu aplicativo está pronto para RELEASE altera o 
-ambiente para production.
+**IMPORTANTE:** Se tudo está funcionando bem em modo SANDBOX e o seu aplicativo está pronto para RELEASE altera o 
+ambiente para production e certifica que estejas a usar a CHAVE_DE_API e MERCHANT_ID para PRODUCTION.
 ```java
 ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID", ClientConfig.Environment.PRODUCTION);
 ```
