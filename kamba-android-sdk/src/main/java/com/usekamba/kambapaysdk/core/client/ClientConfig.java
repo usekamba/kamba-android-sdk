@@ -11,46 +11,51 @@ package com.usekamba.kambapaysdk.core.client;
 import android.support.annotation.NonNull;
 
 /**
- * This class is responsible for setting up parameters
+ * This singleton class is responsible for setting up parameters
  * for Payment Requests
  *
  */
 public class ClientConfig {
 
-        private static ClientConfig instance;
-        private String apiKey;
-        private String merchantId;
-        private Environment environment;
+    private static volatile ClientConfig instance;
+    private static final Object LOCK = new Object();
+    private String apiKey;
+    private String merchantId;
+    private Environment environment;
 
-        public enum Environment {SANDBOX, PRODUCTION }
+    public enum Environment {SANDBOX, PRODUCTION }
 
-        private ClientConfig() {}
+    private ClientConfig() {}
 
-        public static ClientConfig getInstance() {
-            if (instance == null) {
-                instance = new ClientConfig();
+    public static ClientConfig getInstance() {
+        if (instance == null) {
+            synchronized (LOCK) {
+                if (instance == null) {
+                    instance = new ClientConfig();
+                }
             }
-            return instance;
+        }
+        return instance;
+    }
+
+    @SuppressWarnings("ConstantConditions")
+    public ClientConfig configure(@NonNull String apiKey, @NonNull String merchantId, @NonNull Environment environment) {
+        if (apiKey == null) {
+            throw new NullPointerException("You must provide an api key");
         }
 
-        @SuppressWarnings("ConstantConditions")
-        public ClientConfig configure(@NonNull String apiKey, @NonNull String merchantId, @NonNull Environment environment) {
-            if (apiKey == null) {
-                throw new NullPointerException("You must provide an api key");
-            }
-
-            if (merchantId == null) {
-                throw  new NullPointerException("You must provide a merchant id");
-            }
-
-            if (environment == null) {
-                throw new NullPointerException("You must provide an environment");
-            }
-            this.apiKey = apiKey;
-            this.merchantId = merchantId;
-            this.environment = environment;
-            return this;
+        if (merchantId == null) {
+            throw  new NullPointerException("You must provide a merchant id");
         }
+
+        if (environment == null) {
+            throw new NullPointerException("You must provide an environment");
+        }
+        this.apiKey = apiKey;
+        this.merchantId = merchantId;
+        this.environment = environment;
+        return this;
+    }
 
     public String getApiKey() {
         return apiKey;
