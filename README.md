@@ -160,8 +160,8 @@ ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID", Clie
 ```
 
 ## Histórico de versões
-0.9.3: Melhorias e correção de bugs - 07/07/2018
-0.9.4: Melhorias e correção de bugs - 20/08/2018
-1.0.0: Melhoras para reflectir mudanças feitas na API - 01/10/2018
+``` 0.9.3: Melhorias e correção de bugs - 07/07/2018 ```
+``` 0.9.4: Melhorias e correção de bugs - 20/08/2018 ```
+``` 1.0.0: Melhoras para reflectir mudanças feitas na API - 01/10/2018 ```
 
 © 2018 Soluções de Pagamento. Todos os direitos reservados. USEKAMBA, LDA. - Rua Avenida Manuel Vandunem, Ingombotas - Luanda - Angola
