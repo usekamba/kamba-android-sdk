@@ -8,4 +8,5 @@
 
 <resources>
     <string name="kamba_res_app_name">Kamba-Payments-Sdk</string>
+    <string name="kamba_resStart_payment">start payment</string>
 </resources>

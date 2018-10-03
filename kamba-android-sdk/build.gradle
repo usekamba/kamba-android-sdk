@@ -12,10 +12,10 @@ apply plugin: 'com.github.dcendents.android-maven'
 group='com.github.usekamba'
 
 android {
-    compileSdkVersion 27
+    compileSdkVersion 28
     defaultConfig {
         minSdkVersion 17
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
@@ -35,12 +35,12 @@ android {
 ext {
     jodaTimeVersion = "2.9.9"
     moshiVersion = "1.6.0"
-    appCompatVersion = "27.1.1"
+    appCompatVersion = "28.0.0"
     junitVersion = "4.12"
     testRunnerVersion = "1.0.2"
     espressoCoreVersion = "3.0.2"
-    constraintLayoutVersion = "1.1.2"
-    cardViewVersion = "27.1.1"
+    constraintLayoutVersion = "1.1.3"
+    cardViewVersion = "28.0.0"
     okHttpVersion = "3.10.0"
     qrGenVersion = "2.5.0"
 }
