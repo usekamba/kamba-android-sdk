@@ -19,6 +19,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.usekamba.kambapaysdk.R;
+import com.usekamba.kambapaysdk.helpers.DateHelper;
 
 import net.glxn.qrgen.android.QRCode;
 
@@ -76,7 +77,7 @@ public class CheckoutWidget extends ConstraintLayout {
     }
 
     public void setExpirationDate(String expirationDate) {
-        mCheckoutExpirationDate.setText(expirationDate);
+        mCheckoutExpirationDate.setText(String.format("%s às %s", DateHelper.convertDate(expirationDate), DateHelper.convertTimeToMin(expirationDate)));
     }
 
     public void setItemDescription(String itemDescription) {
