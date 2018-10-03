@@ -172,7 +172,7 @@
             app:layout_constraintTop_toBottomOf="@+id/checkout_payment_details">
 
             <TableRow
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1.0"
                 android:divider="@color/kamba_reslight_grey">
@@ -189,10 +189,10 @@
                 <TextView
                     android:id="@+id/checkout_item_amount"
                     android:layout_width="match_parent"
-                    android:layout_weight=".2"
+                    android:layout_weight=".6"
                     android:gravity="center"
                     android:padding="3dip"
-                    android:textAlignment="center"
+                    android:textAlignment="textEnd"
                     android:textColor="@android:color/black"
                     android:textStyle="bold" />
 

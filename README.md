@@ -50,7 +50,7 @@ allprojects {
 ```
 dependencies
 {
-	implementation 'com.github.usekamba:kamba-android-sdk:v0.9.3'
+	implementation 'com.github.usekamba:kamba-android-sdk:v1.0.0'
 }
 ```
 
@@ -99,24 +99,25 @@ Crie uma instância do objeto `CheckoutRequest` que representa o item que seu cl
 ```java
 public class MerchantActivity extends AppCompatActivity {
     ...
-    CheckoutRequest checkoutRequest = new CheckoutRequest();
-    checkoutRequest.setInitialAmount(36000.00);
-    checkoutRequest.setNotes("Curso Android Para Visionários");
-            CheckoutTransaction checkoutTransaction = new CheckoutTransactionBuilder().addCheckoutRequest(checkoutRequest)
-                    .addClientConfig(ClientConfig.getInstance()).build();
-            checkoutTransaction.enqueue(new TransactionCallback() {
-                @Override
-                public void onSuccess(CheckoutResponse checkoutResponse) {
-                    runOnUiThread(() -> {
-                        startActivity(new Intent(context, CheckoutActivity.class).putExtra("checkout", checkoutResponse));
-                    });
-                }
 
-                @Override
-                public void onFailure(String message) {
+    checkoutRequest = new CheckoutRequest();
+    checkoutRequest.setInitialAmount(25600);
+    checkoutRequest.setNotes("Curso de programação android: Básico");
+    CheckoutTransaction checkoutTransaction = new CheckoutTransactionBuilder()
+                .addClientConfig(ClientConfig.getInstance())
+                .addCheckoutRequest(checkoutRequest)
+                .build();
+    checkoutTransaction.enqueue(new TransactionCallback() {
+            @Override
+            public void onSuccess(final CheckoutResponse checkout) {
+                runOnUiThread(() -> startActivity(new Intent(context, CheckoutActivity.class).putExtra("checkout", checkout)));
+            }
 
-                }
-            });
+            @Override
+            public void onFailure(String message) {
+                runOnUiThread(() -> Toast.makeText(context, "Error initiating Payment request: " + message, Toast.LENGTH_LONG).show() );
+            }
+        });
 
     ...
 }
@@ -127,7 +128,9 @@ Na Activity que mostrará o `CheckoutWidget`, faça o seguinte:
 
 ```java 
 public class CheckoutActivity extends AppCompatActivity {
-    CheckoutWidget checkoutWidget;
+    private CheckoutWidget checkoutWidget;
+    private CheckoutResponse checkoutResponse;
+    private KambaButton payButton;
     ...
 
     @Override
@@ -137,14 +140,13 @@ public class CheckoutActivity extends AppCompatActivity {
         checkoutWidget = findViewById(R.id.checkout);
         payButton = findViewById(R.id.pay);
         // Para acessar o checkout response da tela anterior usa sempre response "(CheckoutResponse) getIntent().getSerializableExtra("checkout");
-        response = (CheckoutResponse) getIntent().getSerializableExtra("checkout");
-        checkoutWidget.setAmount(Double.parseDouble(checkoutResponse.getTotalAmount()));
-        checkoutWidget.setExpirationDate("22/09/2018 13:58");
-        checkoutWidget.setTotalCheckoutAmount(Double.parseDouble(checkoutResponse.getTotalAmount()));
+        checkoutResponse = (CheckoutResponse) getIntent().getSerializableExtra("checkout");
+        checkoutWidget.setAmount(checkoutResponse.getTotalAmount());
+        checkoutWidget.setExpirationDate(checkoutResponse.getExpiresAt());
+        checkoutWidget.setTotalCheckoutAmount(checkoutResponse.getTotalAmount());
         checkoutWidget.setItemDescription(checkoutResponse.getNotes());
-        checkoutWidget.setItemAmount(Double.parseDouble(checkoutResponse.getTotalAmount()));
+        checkoutWidget.setItemAmount(checkoutResponse.getInitialAmount());
         checkoutWidget.setQrCode(checkoutResponse.getMerchant().getId());
-    
         payButton.setOnClickListener(v -> payButton.payWithWallet(checkoutResponse, context));
     
     }
@@ -158,7 +160,8 @@ ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID", Clie
 ```
 
 ## Histórico de versões
-0.9.3: Melhorias e correção de bugs - 07/07/2018
-
+``` 0.9.3: Melhorias e correção de bugs - 07/07/2018 ``` <br/>
+``` 0.9.4: Melhorias e correção de bugs - 20/08/2018 ``` <br/>
+``` 1.0.0: Melhoras para reflectir mudanças feitas na API - 03/10/2018 ``` <br/>
 
 © 2018 Soluções de Pagamento. Todos os direitos reservados. USEKAMBA, LDA. - Rua Avenida Manuel Vandunem, Ingombotas - Luanda - Angola

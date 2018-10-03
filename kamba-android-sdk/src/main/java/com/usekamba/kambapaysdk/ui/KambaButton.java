@@ -36,6 +36,8 @@ public class KambaButton extends RelativeLayout {
     private static final String KAMBA_APP_PACKAGE = "com.usekamba.kamba.kamba";
     private static final String TRANSACTION_RECEIVER_ID = "transactionReceiverId";
     private static final String TRANSACTION_RECEIVER_FIRST_NAME = "transactionReceiverFirstName";
+    private static final String TRANSACTION_IS_MERCHANT = "business";
+    private static final String PHONE_NUMBER = "phoneNumber";
     private static final String TRANSACTION_AMOUNT = "amount";
     private static final String DESCRIPTION = "description";
     private static final String WEBSITE = "https://www.usekamba.com/";
@@ -87,10 +89,12 @@ public class KambaButton extends RelativeLayout {
             List<ResolveInfo> activities = packageManager.queryIntentActivities(walletIntent, 0);
             boolean isIntentSafe = activities.size() > 0;
             if (isIntentSafe) {
+                walletIntent.putExtra(TRANSACTION_IS_MERCHANT, true);
                 walletIntent.putExtra(TRANSACTION_RECEIVER_ID, checkoutResponse.getMerchant().getId());
-                walletIntent.putExtra(TRANSACTION_RECEIVER_FIRST_NAME, checkoutResponse.getMerchant().getBusiness_name());
-                walletIntent.putExtra(TRANSACTION_AMOUNT, (checkoutResponse.getTotalAmount()).replace(".0", ""));
+                walletIntent.putExtra(TRANSACTION_RECEIVER_FIRST_NAME, checkoutResponse.getMerchant().getBusinessName());
+                walletIntent.putExtra(TRANSACTION_AMOUNT, (checkoutResponse.getTotalAmount().intValue()));
                 walletIntent.putExtra(DESCRIPTION, checkoutResponse.getNotes());
+                walletIntent.putExtra(PHONE_NUMBER, checkoutResponse.getMerchant().getPhoneNumber());
                 context.startActivity(walletIntent);
             } else {
                 try {
