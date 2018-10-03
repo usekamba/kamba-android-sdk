@@ -4,13 +4,13 @@ import com.squareup.moshi.Json;
 
 import java.io.Serializable;
 
-public class Merchant implements Serializable{
+public class Merchant implements Serializable {
 
 	@Json(name = "business_name")
-	private String business_name;
+	private String businessName;
 
 	@Json(name = "phone_number")
-	private String phone_number;
+	private String phoneNumber;
 
 	@Json(name = "id")
 	private String id;
@@ -18,20 +18,20 @@ public class Merchant implements Serializable{
 	@Json(name = "email")
 	private String email;
 
-	public void setBusiness_name(String business_name){
-		this.business_name = business_name;
+	public void setBusinessName(String businessName){
+		this.businessName = businessName;
 	}
 
-	public String getBusiness_name(){
-		return business_name;
+	public String getBusinessName(){
+		return businessName;
 	}
 
-	public void setPhone_number(String phone_number){
-		this.phone_number = phone_number;
+	public void setPhoneNumber(String phoneNumber){
+		this.phoneNumber = phoneNumber;
 	}
 
-	public String getPhone_number(){
-		return phone_number;
+	public String getPhoneNumber(){
+		return phoneNumber;
 	}
 
 	public void setId(String id){
@@ -54,8 +54,8 @@ public class Merchant implements Serializable{
  	public String toString(){
 		return 
 			"Merchant{" + 
-			"business_name = '" + business_name + '\'' +
-			",phone_number = '" + phone_number + '\'' +
+			"business_name = '" + businessName + '\'' + 
+			",phone_number = '" + phoneNumber + '\'' + 
 			",id = '" + id + '\'' + 
 			",email = '" + email + '\'' + 
 			"}";
