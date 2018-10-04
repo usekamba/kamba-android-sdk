@@ -35,7 +35,7 @@ public class CheckoutActivity extends AppCompatActivity {
         checkoutWidget.setTotalCheckoutAmount(checkoutResponse.getTotalAmount());
         checkoutWidget.setItemDescription(checkoutResponse.getNotes());
         checkoutWidget.setItemAmount(checkoutResponse.getInitialAmount());
-        checkoutWidget.setQrCode(checkoutResponse.getMerchant().getId());
+        checkoutWidget.setQrCode(checkoutResponse.getQrCode());
         payButton.setOnClickListener(v -> payButton.payWithWallet(checkoutResponse, context));
     }
 }

@@ -25,11 +25,13 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
     private final MediaType mediaType = MediaType.parse("application/json");
     private final JsonAdapter<CheckoutRequest> checkoutRequestJsonAdapter = moshi.adapter(CheckoutRequest.class);
     private Request request;
+    private String URL;
 
     private void setUpRequestAuthorization(ClientConfig clientConfig) {
         if (clientConfig.getEnvironment() == ClientConfig.Environment.SANDBOX) {
             RequestBody requestBody = RequestBody.create(mediaType, checkoutRequestJsonAdapter.toJson(checkoutRequest));
             String API_SANDBOX_URL = "https://sandbox.usekamba.com/v1/checkouts";
+            URL = API_SANDBOX_URL.replace("/checkouts", "");
             request = new Request.Builder().url(API_SANDBOX_URL)
                     .header("User-Agent", "SDK")
                     .addHeader("Authorization", "Token " + clientConfig.getApiKey())
@@ -39,6 +41,7 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
         } else {
             RequestBody requestBody = RequestBody.create(mediaType, checkoutRequestJsonAdapter.toJson(checkoutRequest));
             String API_PRODUCTION_URL = "https://api.usekamba.com/v1/checkouts";
+            URL = API_PRODUCTION_URL.replace("/checkouts", "");
             request = new Request.Builder().url(API_PRODUCTION_URL)
                     .header("User Agent", "SDK")
                     .addHeader("Authorization", "Token " + clientConfig.getApiKey())
@@ -64,6 +67,7 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
     @Override
     public CheckoutTransaction build() {
         setUpRequestAuthorization(clientConfig);
+        this.checkoutRequest.setRedirectUrlSuccess(URL);
         CheckoutTransaction transaction = new CheckoutTransaction();
         transaction.setClient(client);
         transaction.setRequest(request);
