@@ -16,7 +16,7 @@ public class CheckoutRequest implements Serializable {
     @Json(name = "channel")
     private final String channel = "ANDROID";
     @Json(name = "redirect_url_success")
-    private final String redirect_url_success = "https://www.usekamba.com";
+    private String redirect_url_success = "https://www.usekamba.com";
     @Json(name = "notes")
     private String notes;
     @Json(name = "initial_amount")
@@ -28,6 +28,10 @@ public class CheckoutRequest implements Serializable {
 
     public String getNotes() {
         return notes;
+    }
+
+    protected void setRedirectUrlSuccess(String urlSuccess) {
+        this.redirect_url_success = urlSuccess;
     }
 
     public void setNotes(String notes) {

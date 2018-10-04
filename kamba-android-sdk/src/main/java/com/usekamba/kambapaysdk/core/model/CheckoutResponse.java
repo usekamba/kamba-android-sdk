@@ -4,7 +4,7 @@ import com.squareup.moshi.Json;
 
 import java.io.Serializable;
 
-public class CheckoutResponse implements Serializable{
+public class CheckoutResponse implements Serializable {
 
 	@Json(name = "notes")
 	private String notes;
@@ -92,7 +92,7 @@ public class CheckoutResponse implements Serializable{
 	}
 
 	public String getQrCode(){
-		return qrCode;
+		return getRedirectUrlSuccess()+"/pay?mID="+getMerchant().getId()+"&chID="+getId();
 	}
 
 	public void setInitialAmount(Double initialAmount){
