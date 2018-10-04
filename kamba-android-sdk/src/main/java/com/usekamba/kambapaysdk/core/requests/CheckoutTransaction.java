@@ -48,11 +48,15 @@ public class CheckoutTransaction {
 
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-
                 if (response.code() == 201) {
                     callback.onSuccess( checkoutResponseJsonAdapter.fromJson(response.body().string()));
-                } else {
-                    callback.onFailure("Check your API Key");
+                }
+                if (response.code() == 422) {
+                    callback.onFailure("CheckoutRequest data is not correct");
+                }
+
+                if (response.code() == 401) {
+                    callback.onFailure("API Key is invalid. Verify that your API KEY is valid otherwise contact suporte@usekamba.com");
                 }
             }
         });

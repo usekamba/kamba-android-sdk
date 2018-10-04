@@ -4,49 +4,37 @@ import com.squareup.moshi.Json;
 
 import java.io.Serializable;
 
-public class CheckoutResponse implements Serializable{
+public class CheckoutResponse implements Serializable {
 
 	@Json(name = "notes")
 	private String notes;
 
-	@Json(name = "fee")
-	private String fee;
+	@Json(name = "expires_at")
+	private String expiresAt;
 
-	@Json(name = "channel")
-	private String channel;
+	@Json(name = "total_amount")
+	private Double totalAmount;
+
+	@Json(name = "redirect_url_success")
+	private String redirectUrlSuccess;
+
+	@Json(name = "fee")
+	private int fee;
 
 	@Json(name = "merchant")
 	private Merchant merchant;
 
-	@Json(name = "created_at")
-	private String created_at;
+	@Json(name = "qr_code")
+	private String qrCode;
 
 	@Json(name = "initial_amount")
-	private String initial_amount;
-
-	@Json(name = "transaction_type")
-	private String transaction_type;
-
-	@Json(name = "updated_at")
-	private String updated_at;
-
-	@Json(name = "total_amount")
-	private String total_amount;
-
-	@Json(name = "redirect_url_success")
-	private String redirect_url_success;
-
-	@Json(name = "qr_code")
-	private QrCode qr_code;
-
-	@Json(name = "currency")
-	private String currency;
+	private Double initialAmount;
 
 	@Json(name = "id")
 	private String id;
 
-	@Json(name = "payment_method")
-	private String payment_method;
+	@Json(name = "transaction_type")
+	private String transactionType;
 
 	@Json(name = "status")
 	private String status;
@@ -59,20 +47,36 @@ public class CheckoutResponse implements Serializable{
 		return notes;
 	}
 
-	public void setFee(String fee){
+	public void setExpiresAt(String expiresAt){
+		this.expiresAt = expiresAt;
+	}
+
+	public String getExpiresAt(){
+		return expiresAt;
+	}
+
+	public void setTotalAmount(Double totalAmount){
+		this.totalAmount = totalAmount;
+	}
+
+	public Double getTotalAmount(){
+		return totalAmount;
+	}
+
+	public void setRedirectUrlSuccess(String redirectUrlSuccess){
+		this.redirectUrlSuccess = redirectUrlSuccess;
+	}
+
+	public String getRedirectUrlSuccess(){
+		return redirectUrlSuccess;
+	}
+
+	public void setFee(int fee){
 		this.fee = fee;
 	}
 
-	public String getFee(){
+	public int getFee(){
 		return fee;
-	}
-
-	public void setChannel(String channel){
-		this.channel = channel;
-	}
-
-	public String getChannel(){
-		return channel;
 	}
 
 	public void setMerchant(Merchant merchant){
@@ -83,68 +87,20 @@ public class CheckoutResponse implements Serializable{
 		return merchant;
 	}
 
-	public void setCreatedAt(String created_at){
-		this.created_at = created_at;
+	public void setQrCode(String qrCode){
+		this.qrCode = qrCode;
 	}
 
-	public String getCreatedAt(){
-		return created_at;
+	public String getQrCode(){
+		return getRedirectUrlSuccess()+"/pay?mID="+getMerchant().getId()+"&chID="+getId();
 	}
 
-	public void setInitialAmount(String initial_amount){
-		this.initial_amount = initial_amount;
+	public void setInitialAmount(Double initialAmount){
+		this.initialAmount = initialAmount;
 	}
 
-	public String getInitialAmount(){
-		return initial_amount;
-	}
-
-	public void setTransactionType(String transaction_type){
-		this.transaction_type = transaction_type;
-	}
-
-	public String getTransactionType(){
-		return transaction_type;
-	}
-
-	public void setUpdatedAt(String updated_at){
-		this.updated_at = updated_at;
-	}
-
-	public String getUpdatedAt(){
-		return updated_at;
-	}
-
-	public void setTotalAmount(String total_amount){
-		this.total_amount = total_amount;
-	}
-
-	public String getTotalAmount(){
-		return total_amount;
-	}
-
-	public void setRedirectUrlSuccess(String redirect_url_success){
-		this.redirect_url_success = redirect_url_success;
-	}
-
-	public String getRedirectUrlSuccess(){
-		return redirect_url_success;
-	}
-
-	public void setQrCode(QrCode qr_code){
-		this.qr_code = qr_code;
-	}
-
-	public QrCode getQrCode(){
-		return qr_code;
-	}
-
-	public void setCurrency(String currency){
-		this.currency = currency;
-	}
-
-	public String getCurrency(){
-		return currency;
+	public Double getInitialAmount(){
+		return initialAmount;
 	}
 
 	public void setId(String id){
@@ -155,12 +111,12 @@ public class CheckoutResponse implements Serializable{
 		return id;
 	}
 
-	public void setPaymentMethod(String payment_method){
-		this.payment_method = payment_method;
+	public void setTransactionType(String transactionType){
+		this.transactionType = transactionType;
 	}
 
-	public String getPaymentMethod(){
-		return payment_method;
+	public String getTransactionType(){
+		return transactionType;
 	}
 
 	public void setStatus(String status){
@@ -172,23 +128,20 @@ public class CheckoutResponse implements Serializable{
 	}
 
 	@Override
-	public String toString() {
-		return "CheckoutResponse{" +
-				"notes='" + notes + '\'' +
-				", fee='" + fee + '\'' +
-				", channel='" + channel + '\'' +
-				", merchant=" + merchant +
-				", created_at='" + created_at + '\'' +
-				", initial_amount='" + initial_amount + '\'' +
-				", transaction_type='" + transaction_type + '\'' +
-				", updated_at='" + updated_at + '\'' +
-				", total_amount='" + total_amount + '\'' +
-				", redirect_url_success='" + redirect_url_success + '\'' +
-				", qr_code=" + qr_code +
-				", currency='" + currency + '\'' +
-				", id='" + id + '\'' +
-				", payment_method='" + payment_method + '\'' +
-				", status='" + status + '\'' +
-				'}';
-	}
+ 	public String toString(){
+		return 
+			"CheckoutResponse{" + 
+			"notes = '" + notes + '\'' + 
+			",expires_at = '" + expiresAt + '\'' + 
+			",total_amount = '" + totalAmount + '\'' + 
+			",redirect_url_success = '" + redirectUrlSuccess + '\'' + 
+			",fee = '" + fee + '\'' + 
+			",merchant = '" + merchant + '\'' + 
+			",qr_code = '" + qrCode + '\'' + 
+			",initial_amount = '" + initialAmount + '\'' + 
+			",id = '" + id + '\'' + 
+			",transaction_type = '" + transactionType + '\'' + 
+			",status = '" + status + '\'' + 
+			"}";
+		}
 }

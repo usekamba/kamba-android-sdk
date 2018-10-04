@@ -8,15 +8,21 @@
 
 package com.usekamba.kambapaysdk.core.requests;
 
+import com.squareup.moshi.Json;
+
 import java.io.Serializable;
 
 public class CheckoutRequest implements Serializable {
-    private final String redirect_url_success = "https://www.usekamba.com";
-    private final String channel = "Mobile";
+    @Json(name = "channel")
+    private final String channel = "ANDROID";
+    @Json(name = "redirect_url_success")
+    private String redirect_url_success = "https://www.usekamba.com";
+    @Json(name = "notes")
     private String notes;
-    private final String currency = "AOA";
-    private Double initial_amount;
-    private final String payment_method = "wallet";
+    @Json(name = "initial_amount")
+    private int initial_amount;
+    @Json(name = "payment_method")
+    private final String payment_method = "WALLET";
 
     public CheckoutRequest() { }
 
@@ -24,15 +30,19 @@ public class CheckoutRequest implements Serializable {
         return notes;
     }
 
+    protected void setRedirectUrlSuccess(String urlSuccess) {
+        this.redirect_url_success = urlSuccess;
+    }
+
     public void setNotes(String notes) {
         this.notes = notes;
     }
 
-    public Double getInitialAmount() {
+    public int getInitialAmount() {
         return initial_amount;
     }
 
-    public void setInitialAmount(Double initial_amount) {
+    public void setInitialAmount(int initial_amount) {
         this.initial_amount = initial_amount;
     }
 }
