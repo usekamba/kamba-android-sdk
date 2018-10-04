@@ -50,7 +50,7 @@ allprojects {
 ```
 dependencies
 {
-	implementation 'com.github.usekamba:kamba-android-sdk:v1.0.0'
+	implementation 'com.github.usekamba:kamba-android-sdk:v1.0.1'
 }
 ```
 
@@ -146,7 +146,7 @@ public class CheckoutActivity extends AppCompatActivity {
         checkoutWidget.setTotalCheckoutAmount(checkoutResponse.getTotalAmount());
         checkoutWidget.setItemDescription(checkoutResponse.getNotes());
         checkoutWidget.setItemAmount(checkoutResponse.getInitialAmount());
-        checkoutWidget.setQrCode(checkoutResponse.getMerchant().getId());
+        checkoutWidget.setQrCode(checkoutResponse.getQrCode());
         payButton.setOnClickListener(v -> payButton.payWithWallet(checkoutResponse, context));
     
     }
@@ -163,5 +163,6 @@ ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID", Clie
 ``` 0.9.3: Melhorias e correção de bugs - 07/07/2018 ``` <br/>
 ``` 0.9.4: Melhorias e correção de bugs - 20/08/2018 ``` <br/>
 ``` 1.0.0: Melhoras para reflectir mudanças feitas na API - 03/10/2018 ``` <br/>
+``` 1.0.1: Corrigimos o bug que causava uma execção ao gerar o código QR do CheckoutWidget - 04/10/2018 ``` <br/>
 
 © 2018 Soluções de Pagamento. Todos os direitos reservados. USEKAMBA, LDA. - Rua Avenida Manuel Vandunem, Ingombotas - Luanda - Angola
