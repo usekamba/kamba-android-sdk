@@ -73,8 +73,8 @@ public class KambaButton extends RelativeLayout {
         Typeface font = ResourcesCompat.getFont(context, R.font.montserrat_bold);
         mText.setTypeface(font, Typeface.BOLD);
 
-        if (!attributes.getBoolean(R.styleable.KambaButton_lightTheme, true)) {
-            mBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.button_dark_theme));
+        if (attributes.getBoolean(R.styleable.KambaButton_lightTheme, true)) {
+            mBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.button_light_theme));
         } else {
             mBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.button));
         }

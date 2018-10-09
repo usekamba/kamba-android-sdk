@@ -13,5 +13,5 @@
     android:shape="rectangle"
     tools:ignore="ResourceName">
     <corners android:radius="@dimen/kamba_res_corner_radius" />
-    <solid android:color="@color/kamba_reslight_grey" />
+    <solid android:color="@color/kamba_resbuttonLighThemeShadow" />
 </shape>

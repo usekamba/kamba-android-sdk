@@ -9,7 +9,7 @@
 
 <resources xmlns:tools="http://schemas.android.com/tools">
     <declare-styleable name="KambaButton" tools:ignore="ResourceName">
-        <attr name="lightTheme" format="boolean" tools:ignore="ResourceName" />
+        <attr name="lightTheme" default="false" format="boolean" tools:ignore="ResourceName" />
     </declare-styleable>
 
     <declare-styleable name="kamba_res_CheckoutWidget">
