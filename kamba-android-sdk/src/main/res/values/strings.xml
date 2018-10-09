@@ -11,4 +11,5 @@
     <string name="kamba_res_button_text" >Pagar com Kamba</string>
     <string name="kamba_res_valid_until">Válido até</string>
     <string name="kamba_res_total">Total</string>
+    <string name="pagar_com_kamba">Pagar com Kamba</string>
 </resources>

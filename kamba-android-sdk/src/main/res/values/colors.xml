@@ -30,4 +30,5 @@
     <color name="kamba_resgrey_standard">#919191</color>
     <color name="kamba_resunitel">#e26612</color>
     <color name="kamba_resdisable">#dddddd</color>
+    <color name="kamba_resbuttonLighThemeShadow">#DEDEDE</color>
 </resources>

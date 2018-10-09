@@ -50,7 +50,7 @@ allprojects {
 ```
 dependencies
 {
-	implementation 'com.github.usekamba:kamba-android-sdk:v1.0.1'
+	implementation 'com.github.usekamba:kamba-android-sdk:v1.0.2'
 }
 ```
 
@@ -159,10 +159,58 @@ ambiente para production e certifica que estejas a usar a CHAVE_DE_API e MERCHAN
 ClientConfig.getInstance().configure("SUA_CHAVE_DE_API", "SEU_MERCHANT_ID", ClientConfig.Environment.PRODUCTION);
 ```
 
+## Customizar
+Actualmente é possível alterar o estilo do botão conforme a UI do seu app. 
+
+### Dark Theme
+![Screenshot](/screenshots/kamba-button-dark-theme.png)
+Para usar este tema basta definir a propriedade:  ```xml app:lightTheme="false" ```
+
+Exemplo:
+
+```xml 
+<com.usekamba.kambapaysdk.ui.KambaButton
+        android:id="@+id/pay"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:lightTheme="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+</com.usekamba.kambapaysdk.ui.KambaButton>
+
+```
+
+### Light Theme
+![Screenshot](/screenshots/kamba-button-dark-theme.png)
+Para usar este tema basta definir a propriedade:  ```xml app:lightTheme="true" ```
+
+Exemplo:
+
+```xml 
+<com.usekamba.kambapaysdk.ui.KambaButton
+        android:id="@+id/pay"
+        android:layout_width="match_parent"
+        android:layout_height="52dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        app:lightTheme="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+</com.usekamba.kambapaysdk.ui.KambaButton>
+
+```
+
 ## Histórico de versões
 ``` 0.9.3: Melhorias e correção de bugs - 07/07/2018 ``` <br/>
 ``` 0.9.4: Melhorias e correção de bugs - 20/08/2018 ``` <br/>
 ``` 1.0.0: Melhoras para reflectir mudanças feitas na API - 03/10/2018 ``` <br/>
 ``` 1.0.1: Corrigimos o bug que causava uma execção ao gerar o código QR do CheckoutWidget - 04/10/2018 ``` <br/>
+``` 1.0.2: Adicionar suporte para temas ao botão Kamba - 09/10/2018 ``` <br/>
 
 © 2018 Soluções de Pagamento. Todos os direitos reservados. USEKAMBA, LDA. - Rua Avenida Manuel Vandunem, Ingombotas - Luanda - Angola
