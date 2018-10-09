@@ -185,7 +185,7 @@ Exemplo:
 ```
 
 ### Light Theme
-![Screenshot](/screenshots/kamba-button-dark-theme.png)
+![Screenshot](/screenshots/kamba-button-light-theme.png)
 Para usar este tema basta definir a propriedade:  ```xml app:lightTheme="true" ```
 
 Exemplo:
