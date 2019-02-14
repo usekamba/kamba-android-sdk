@@ -10,21 +10,34 @@ package com.usekamba.kambapaysdk.core.requests;
 
 import com.squareup.moshi.Json;
 
+import java.io.IOException;
 import java.io.Serializable;
 
-public class CheckoutRequest implements Serializable {
+import okhttp3.MediaType;
+import okhttp3.RequestBody;
+import okio.BufferedSink;
+
+public class CheckoutRequest extends RequestBody implements Serializable {
     @Json(name = "channel")
-    private final String channel = "ANDROID";
+    private final String channel = "WEB";
     @Json(name = "redirect_url_success")
-    private String redirect_url_success = "https://www.usekamba.com";
+    private String redirect_url_success = "https://usekamba.com";
     @Json(name = "notes")
     private String notes;
     @Json(name = "initial_amount")
     private int initial_amount;
-    @Json(name = "payment_method")
-    private final String payment_method = "WALLET";
 
     public CheckoutRequest() { }
+
+    @Override
+    public MediaType contentType() {
+        return null;
+    }
+
+    @Override
+    public void writeTo(BufferedSink sink) throws IOException {
+
+    }
 
     public String getNotes() {
         return notes;

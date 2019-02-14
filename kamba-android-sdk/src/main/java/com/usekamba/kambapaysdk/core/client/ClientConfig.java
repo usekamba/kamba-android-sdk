@@ -21,6 +21,7 @@ public class ClientConfig {
     private static final Object LOCK = new Object();
     private String apiKey;
     private String merchantId;
+    private String secretKey;
     private Environment environment;
 
     public enum Environment {SANDBOX, PRODUCTION }
@@ -39,7 +40,7 @@ public class ClientConfig {
     }
 
     @SuppressWarnings("ConstantConditions")
-    public ClientConfig configure(@NonNull String apiKey, @NonNull String merchantId, @NonNull Environment environment) {
+    public ClientConfig configure(@NonNull String apiKey, @NonNull String merchantId, @NonNull String secretKey, @NonNull Environment environment) {
         if (apiKey == null) {
             throw new NullPointerException("You must provide an api key");
         }
@@ -51,10 +52,23 @@ public class ClientConfig {
         if (environment == null) {
             throw new NullPointerException("You must provide an environment");
         }
+
+        if (secretKey == null) {
+            throw  new NullPointerException("You must provide a secret");
+        }
         this.apiKey = apiKey;
         this.merchantId = merchantId;
         this.environment = environment;
+        this.secretKey = secretKey;
         return this;
+    }
+
+    public String getSecretKey() {
+        return secretKey;
+    }
+
+    public void setSecretKey(String secretKey) {
+        this.secretKey = secretKey;
     }
 
     public String getApiKey() {

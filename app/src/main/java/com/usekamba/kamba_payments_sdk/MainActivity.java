@@ -31,12 +31,14 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         startPayment = findViewById(R.id.start_payment);
-        ClientConfig.getInstance().configure("e96NSniNzFu7TvqOmvUIsgtt", "b18fdbfd-3646-4b94-9847-0d7b839c0118", ClientConfig.Environment.SANDBOX);
+        ClientConfig.getInstance().configure("",
+                "",
+                "",
+                ClientConfig.Environment.PRODUCTION);
         checkoutRequest = new CheckoutRequest();
-        checkoutRequest.setInitialAmount(600);
+        checkoutRequest.setInitialAmount(90);
         checkoutRequest.setNotes("Curso de programação android: Básico");
         startPayment.setOnClickListener(v -> initKambaTransaction());
-
     }
 
 
