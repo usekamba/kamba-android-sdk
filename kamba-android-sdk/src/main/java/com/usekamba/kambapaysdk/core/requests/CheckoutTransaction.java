@@ -9,6 +9,7 @@
 package com.usekamba.kambapaysdk.core.requests;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
@@ -29,6 +30,7 @@ public class CheckoutTransaction {
     private final Moshi moshi = new Moshi.Builder().build();
     private final JsonAdapter<CheckoutResponse> checkoutResponseJsonAdapter = moshi.adapter(CheckoutResponse.class);
     private TransactionCallback callback;
+    private String TAG = this.getClass().getSimpleName();
 
     void setClient(OkHttpClient client) {
         this.client = client;
@@ -49,6 +51,8 @@ public class CheckoutTransaction {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.code() == 201) {
+                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.message());
+                    Log.d(TAG, "KAMBA ANDROID SDK: " + checkoutResponseJsonAdapter.fromJson(response.body().string()));
                     callback.onSuccess( checkoutResponseJsonAdapter.fromJson(response.body().string()));
                 }
                 if (response.code() == 422) {
@@ -57,6 +61,18 @@ public class CheckoutTransaction {
 
                 if (response.code() == 401) {
                     callback.onFailure("API Key is invalid. Verify that your API KEY is valid otherwise contact suporte@usekamba.com");
+                }
+
+                if (response.code() == 403) {
+                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.message());
+                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.body().string());
+                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().headers());
+                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().method());
+                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().url());
+                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().header("Signature"));
+                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().header("Authorization"));
+                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().header("Content-Type"));
+                    callback.onFailure("Signature is Invalid");
                 }
             }
         });

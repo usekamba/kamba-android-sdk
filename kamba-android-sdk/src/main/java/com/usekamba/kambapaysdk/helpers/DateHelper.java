@@ -12,6 +12,8 @@ import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.ISODateTimeFormat;
 
+import java.util.Locale;
+
 public class DateHelper {
     /***
      * Convert a Rails Date Object to day/month/year signature
@@ -21,6 +23,15 @@ public class DateHelper {
     public static String convertDate(String string){
         String format = "dd/MM/yyyy";
         org.joda.time.format.DateTimeFormatter parser = ISODateTimeFormat.dateTimeParser();
+        DateTime date = parser.parseDateTime(string);
+        org.joda.time.format.DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
+        return date.toString(fmt);
+    }
+
+
+    public static String getGMTTime(String string){
+        String format = "EEE, dd MMM yyyy HH:mm:ss 'GMT'";
+        org.joda.time.format.DateTimeFormatter parser = ISODateTimeFormat.dateTimeParser().withLocale(Locale.US);
         DateTime date = parser.parseDateTime(string);
         org.joda.time.format.DateTimeFormatter fmt = DateTimeFormat.forPattern(format);
         return date.toString(fmt);
