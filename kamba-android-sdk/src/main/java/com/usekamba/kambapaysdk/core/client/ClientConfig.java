@@ -13,20 +13,20 @@ import android.support.annotation.NonNull;
 /**
  * This singleton class is responsible for setting up parameters
  * for Payment Requests
- *
  */
 public class ClientConfig {
 
     private static volatile ClientConfig instance;
     private static final Object LOCK = new Object();
-    private String apiKey;
+
     private String merchantId;
     private String secretKey;
     private Environment environment;
 
-    public enum Environment {SANDBOX, PRODUCTION }
+    public enum Environment {SANDBOX, PRODUCTION}
 
-    private ClientConfig() {}
+    private ClientConfig() {
+    }
 
     public static ClientConfig getInstance() {
         if (instance == null) {
@@ -40,13 +40,10 @@ public class ClientConfig {
     }
 
     @SuppressWarnings("ConstantConditions")
-    public ClientConfig configure(@NonNull String apiKey, @NonNull String merchantId, @NonNull String secretKey, @NonNull Environment environment) {
-        if (apiKey == null) {
-            throw new NullPointerException("You must provide an api key");
-        }
+    public ClientConfig configure(@NonNull String merchantId, @NonNull String secretKey, @NonNull Environment environment) {
 
         if (merchantId == null) {
-            throw  new NullPointerException("You must provide a merchant id");
+            throw new NullPointerException("You must provide a merchant id");
         }
 
         if (environment == null) {
@@ -54,9 +51,9 @@ public class ClientConfig {
         }
 
         if (secretKey == null) {
-            throw  new NullPointerException("You must provide a secret");
+            throw new NullPointerException("You must provide a secret");
         }
-        this.apiKey = apiKey;
+
         this.merchantId = merchantId;
         this.environment = environment;
         this.secretKey = secretKey;
@@ -69,14 +66,6 @@ public class ClientConfig {
 
     public void setSecretKey(String secretKey) {
         this.secretKey = secretKey;
-    }
-
-    public String getApiKey() {
-        return apiKey;
-    }
-
-    public void setApiKey(String apiKey) {
-        this.apiKey = apiKey;
     }
 
     public String getMerchantId() {

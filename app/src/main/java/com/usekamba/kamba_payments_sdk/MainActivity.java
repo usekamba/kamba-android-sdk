@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity {
         startPayment = findViewById(R.id.start_payment);
         ClientConfig.getInstance().configure("",
                 "",
-                "",
                 ClientConfig.Environment.PRODUCTION);
         checkoutRequest = new CheckoutRequest();
         checkoutRequest.setInitialAmount(90);

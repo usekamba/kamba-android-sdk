@@ -18,6 +18,7 @@ import com.usekamba.kambapaysdk.core.HmacSha1;
 import com.usekamba.kambapaysdk.core.client.ClientConfig;
 import com.usekamba.kambapaysdk.core.security.binary.Hex;
 import com.usekamba.kambapaysdk.core.security.digest.HmacUtils;
+
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
 import org.json.JSONObject;
@@ -29,8 +30,10 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
+
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -59,7 +62,6 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
             Log.d("MainActivity", digest.toString());
             Request.Builder builder = new Request.Builder();
             Headers a = new Headers.Builder()
-                    .add("Authorization", "Token " + clientConfig.getApiKey())
                     .add("Content-Type", "application/json;charset=utf-8")
                     .add("Signature", timeStamp + "." + digest.toString())
                     .build();
@@ -73,7 +75,7 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
             URL = API_PRODUCTION_URL.replace("/checkouts", "");
             String conanicalString = generateConanicalString(checkoutRequest);
             HmacSha1 sha1 = new HmacSha1();
-            byte [] digest = sha1.computeHmac(conanicalString, clientConfig.getSecretKey());
+            byte[] digest = sha1.computeHmac(conanicalString, clientConfig.getSecretKey());
             String base64Digest = Base64.encodeToString(digest, Base64.DEFAULT);
             Log.d("MainActivity", base64Digest);
             String signature = timeStamp + "." + base64Digest;
@@ -107,8 +109,9 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
             byte[] hexBytes = new Hex().encode(rawHmac);
             result = new String(hexBytes, "ISO-8859-1");
             Log.d("MainActivity", "MAC : " + result);
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        catch (Exception e) { e.printStackTrace(); }
 
         return result;
     }
@@ -129,7 +132,7 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
 
     public static String md5(String input) {
         String result = input;
-        if(input != null) {
+        if (input != null) {
             MessageDigest md = null;
             try {
                 md = MessageDigest.getInstance("MD5");
@@ -139,7 +142,7 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
             md.update(input.getBytes());
             BigInteger hash = new BigInteger(1, md.digest());
             result = hash.toString(16);
-            while(result.length() < 32) {
+            while (result.length() < 32) {
                 result = "0" + result;
             }
         }
