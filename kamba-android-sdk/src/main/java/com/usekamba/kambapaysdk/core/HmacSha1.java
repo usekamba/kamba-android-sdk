@@ -8,6 +8,11 @@
 
 package com.usekamba.kambapaysdk.core;
 
+import android.content.Context;
+import android.widget.Toast;
+
+import com.usekamba.kambapaysdk.core.client.ClientConfig;
+
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 
@@ -18,6 +23,7 @@ import javax.crypto.spec.SecretKeySpec;
 public class HmacSha1 {
 
     private static final String ALGORITHM = "HmacSHA1";
+    private Context context;
 
     private String getHexString(byte[] bytes) {
         StringBuilder sb = new StringBuilder(bytes.length * 2);
@@ -36,7 +42,8 @@ public class HmacSha1 {
             return hmac.doFinal(message.getBytes());
         } catch (InvalidKeyException e) {
 
-        } catch (NoSuchAlgorithmException e1) {  }
+        } catch (NoSuchAlgorithmException e1) {
+        }
         return null;
     }
 

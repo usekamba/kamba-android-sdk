@@ -8,8 +8,12 @@
 
 package com.usekamba.kambapaysdk.core.requests;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Base64;
 import android.util.Log;
+import android.view.View;
+import android.widget.Toast;
 
 import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
@@ -50,6 +54,7 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
     private Request request;
     private String URL;
     private String timeStamp;
+
 
     private void setUpRequestAuthorization(ClientConfig clientConfig) {
         if (clientConfig.getEnvironment() == ClientConfig.Environment.SANDBOX) {
@@ -170,11 +175,13 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
 
     @Override
     public CheckoutTransaction build() {
-        setUpRequestAuthorization(clientConfig);
-        // this.checkoutRequest.setRedirectUrlSuccess(URL);
-        CheckoutTransaction transaction = new CheckoutTransaction();
-        transaction.setClient(client);
-        transaction.setRequest(request);
-        return transaction;
+
+            setUpRequestAuthorization(clientConfig);
+            // this.checkoutRequest.setRedirectUrlSuccess(URL);
+            CheckoutTransaction transaction = new CheckoutTransaction();
+            transaction.setClient(client);
+            transaction.setRequest(request);
+            return transaction;
+
     }
 }

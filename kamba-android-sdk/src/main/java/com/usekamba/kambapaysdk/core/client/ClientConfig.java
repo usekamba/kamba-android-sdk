@@ -18,15 +18,13 @@ public class ClientConfig {
 
     private static volatile ClientConfig instance;
     private static final Object LOCK = new Object();
-
     private String merchantId;
     private String secretKey;
     private Environment environment;
 
     public enum Environment {SANDBOX, PRODUCTION}
 
-    private ClientConfig() {
-    }
+    private ClientConfig() { }
 
     public static ClientConfig getInstance() {
         if (instance == null) {
@@ -41,7 +39,6 @@ public class ClientConfig {
 
     @SuppressWarnings("ConstantConditions")
     public ClientConfig configure(@NonNull String merchantId, @NonNull String secretKey, @NonNull Environment environment) {
-
         if (merchantId == null) {
             throw new NullPointerException("You must provide a merchant id");
         }
