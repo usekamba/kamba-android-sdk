@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
 
     public View.OnClickListener initVerification() {
         return new View.OnClickListener() {
-            @Override
             public void onClick(View v) {
                 String merchantId = ClientConfig.getInstance().getMerchantId();
                 String secreKey = ClientConfig.getInstance().getSecretKey();
