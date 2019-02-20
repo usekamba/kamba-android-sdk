@@ -11,8 +11,8 @@ package com.usekamba.kamba_payments_sdk;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
@@ -33,31 +33,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ClientConfig.getInstance().configure("",
-                "",
-                ClientConfig.Environment.PRODUCTION);
+        ClientConfig.getInstance().configure("", "", ClientConfig.Environment.PRODUCTION);
         checkoutRequest = new CheckoutRequest();
         checkoutRequest.setInitialAmount(90);
         checkoutRequest.setNotes("Curso de programação android: Básico");
-        findViewById(R.id.start_payment).setOnClickListener(initVerification());
-
-
-    }
-
-
-    public View.OnClickListener initVerification() {
-        return new View.OnClickListener() {
-            public void onClick(View v) {
-                String merchantId = ClientConfig.getInstance().getMerchantId();
-                String secreKey = ClientConfig.getInstance().getSecretKey();
-                String environment = ClientConfig.Environment.SANDBOX.toString();
-                if (merchantId.equals("") || secreKey.equals("") || environment.equals("SANDBOX")) {
-                    Toast.makeText(MainActivity.this, "the marchantId or secretKye can not be null", Toast.LENGTH_LONG).show();
-                } else {
-                    initKambaTransaction();
-                }
-            }
-        };
+        findViewById(R.id.start_payment).setOnClickListener(v -> initKambaTransaction());
     }
 
     private void initKambaTransaction() {

@@ -24,7 +24,8 @@ public class ClientConfig {
 
     public enum Environment {SANDBOX, PRODUCTION}
 
-    private ClientConfig() { }
+    private ClientConfig() {
+    }
 
     public static ClientConfig getInstance() {
         if (instance == null) {
@@ -39,15 +40,15 @@ public class ClientConfig {
 
     @SuppressWarnings("ConstantConditions")
     public ClientConfig configure(@NonNull String merchantId, @NonNull String secretKey, @NonNull Environment environment) {
-        if (merchantId == null) {
+        if (merchantId == null || merchantId.equals("")) {
             throw new NullPointerException("You must provide a merchant id");
         }
 
-        if (environment == null) {
+        if (environment == null || environment.equals("")) {
             throw new NullPointerException("You must provide an environment");
         }
 
-        if (secretKey == null) {
+        if (secretKey == null || secretKey.equals("")) {
             throw new NullPointerException("You must provide a secret");
         }
 
