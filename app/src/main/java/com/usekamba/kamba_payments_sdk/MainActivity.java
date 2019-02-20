@@ -26,7 +26,6 @@ import com.usekamba.kambapaysdk.core.requests.TransactionCallback;
 
 public class MainActivity extends AppCompatActivity {
     private Context context = this;
-    private Button startPayment = null;
     CheckoutRequest checkoutRequest;
 
     @Override

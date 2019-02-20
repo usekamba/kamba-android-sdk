@@ -44,12 +44,12 @@ public class ClientConfig {
             throw new NullPointerException("You must provide a merchant id");
         }
 
-        if (environment == null || environment.equals("")) {
-            throw new NullPointerException("You must provide an environment");
+        if ((environment == null) || (environment != Environment.SANDBOX || environment != Environment.PRODUCTION)) {
+            throw new NullPointerException("You must provide a valid environment");
         }
 
         if (secretKey == null || secretKey.equals("")) {
-            throw new NullPointerException("You must provide a secret");
+            throw new NullPointerException("You must provide a secret key");
         }
 
         this.merchantId = merchantId;
