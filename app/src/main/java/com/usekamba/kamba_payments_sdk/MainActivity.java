@@ -39,7 +39,6 @@ public class MainActivity extends AppCompatActivity {
         checkoutRequest.setNotes("Curso de programação android: Básico");
         findViewById(R.id.start_payment).setOnClickListener(v -> initKambaTransaction());
     }
-
     private void initKambaTransaction() {
         CheckoutTransaction checkoutTransaction = new CheckoutTransactionBuilder()
                 .addClientConfig(ClientConfig.getInstance())
