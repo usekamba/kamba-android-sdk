@@ -7,45 +7,42 @@
  */
 
 package com.usekamba.kambapaysdk.core;
-
-import android.content.Context;
-import android.widget.Toast;
-
-import com.usekamba.kambapaysdk.core.client.ClientConfig;
-
-import java.security.InvalidKeyException;
-import java.security.NoSuchAlgorithmException;
-
 import javax.crypto.Mac;
-import javax.crypto.SecretKey;
 import javax.crypto.spec.SecretKeySpec;
 
 public class HmacSha1 {
 
-    private static final String ALGORITHM = "HmacSHA1";
-    private Context context;
-
-    private String getHexString(byte[] bytes) {
-        StringBuilder sb = new StringBuilder(bytes.length * 2);
-        for (byte b : bytes) {
-            sb.append(String.format("%02x", b));
-        }
-        return sb.toString();
+    public static String hmacSha1(String KEY, String VALUE) {
+        return hmacSha(KEY, VALUE, "HmacSHA1");
     }
 
-    public byte[] computeHmac(String message, String secretKey) {
-        Mac hmac;
-        SecretKey secretKey1 = new SecretKeySpec(secretKey.getBytes(), ALGORITHM);
+    public static String hmacSha256(String KEY, String VALUE) {
+        return hmacSha(KEY, VALUE, "HmacSHA256");
+    }
+
+    private static String hmacSha(String KEY, String VALUE, String SHA_TYPE) {
         try {
-            hmac = Mac.getInstance("HmacSHA1");
-            hmac.init(secretKey1);
-            return hmac.doFinal(message.getBytes());
-        } catch (InvalidKeyException e) {
+            SecretKeySpec signingKey = new SecretKeySpec(KEY.getBytes("UTF-8"), SHA_TYPE);
+            Mac mac = Mac.getInstance(SHA_TYPE);
+            mac.init(signingKey);
+            byte[] rawHmac = mac.doFinal(VALUE.getBytes("UTF-8"));
 
-        } catch (NoSuchAlgorithmException e1) {
+            byte[] hexArray = {
+                    (byte)'0', (byte)'1', (byte)'2', (byte)'3',
+                    (byte)'4', (byte)'5', (byte)'6', (byte)'7',
+                    (byte)'8', (byte)'9', (byte)'a', (byte)'b',
+                    (byte)'c', (byte)'d', (byte)'e', (byte)'f'
+            };
+            byte[] hexChars = new byte[rawHmac.length * 2];
+            for ( int j = 0; j < rawHmac.length; j++ ) {
+                int v = rawHmac[j] & 0xFF;
+                hexChars[j * 2] = hexArray[v >>> 4];
+                hexChars[j * 2 + 1] = hexArray[v & 0x0F];
+            }
+            return new String(hexChars);
         }
-        return null;
+        catch (Exception ex) {
+            throw new RuntimeException(ex);
+        }
     }
-
 }
-

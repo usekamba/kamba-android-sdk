@@ -14,19 +14,21 @@
     tools:ignore="ResourceName">
 
     <RelativeLayout
-        android:foreground="?attr/selectableItemBackground"
         android:id="@+id/kamba_button_bg"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="@drawable/button">
+        android:background="@drawable/button"
+        android:foreground="?attr/selectableItemBackground"
+        android:padding="8dp">
 
         <TextView
             android:id="@+id/kamba_button_text"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerInParent="true"
+            android:layout_alignParentStart="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="64dp"
+            android:layout_toStartOf="@+id/kamba_logo"
             android:alpha="1"
             android:fontFamily="@font/montserrat_bold"
             android:gravity="center_vertical|center_horizontal|center"
@@ -40,14 +42,12 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:layout_alignParentTop="true"
-            android:layout_marginEnd="49dp"
-            android:layout_marginTop="8dp"
-            android:adjustViewBounds="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="57dp"
+            android:layout_marginRight="30dp"
+            android:adjustViewBounds="false"
             android:background="@drawable/pay_logo"
-            android:cropToPadding="true"
-            android:layout_alignParentRight="true"
-            android:layout_marginRight="49dp" />
+            android:cropToPadding="false" />
     </RelativeLayout>
 
 </merge>

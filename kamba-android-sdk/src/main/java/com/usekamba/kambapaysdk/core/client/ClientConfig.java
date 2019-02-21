@@ -9,6 +9,7 @@
 package com.usekamba.kambapaysdk.core.client;
 
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 /**
  * This singleton class is responsible for setting up parameters
@@ -59,6 +60,7 @@ public class ClientConfig {
     }
 
     public String getSecretKey() {
+        Log.d("MainActivity", secretKey);
         return secretKey;
     }
 

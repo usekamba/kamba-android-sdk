@@ -51,8 +51,6 @@ public class CheckoutTransaction {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.code() == 201) {
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.message());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + checkoutResponseJsonAdapter.fromJson(response.body().string()));
                     callback.onSuccess( checkoutResponseJsonAdapter.fromJson(response.body().string()));
                 }
                 if (response.code() == 422) {
