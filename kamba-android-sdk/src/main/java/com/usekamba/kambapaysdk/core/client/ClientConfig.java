@@ -44,7 +44,7 @@ public class ClientConfig {
             throw new NullPointerException("You must provide a merchant id");
         }
 
-        if ((environment == null) || (environment != Environment.SANDBOX || environment != Environment.PRODUCTION)) {
+        if ((environment == null) || (environment != Environment.PRODUCTION && environment != Environment.SANDBOX)) {
             throw new NullPointerException("You must provide a valid environment");
         }
 

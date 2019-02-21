@@ -32,7 +32,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ClientConfig.getInstance().configure("", "", ClientConfig.Environment.PRODUCTION);
+        ClientConfig.getInstance().configure("", "",
+                ClientConfig.Environment.PRODUCTION);
         checkoutRequest = new CheckoutRequest();
         checkoutRequest.setInitialAmount(90);
         checkoutRequest.setNotes("Curso de programação android: Básico");
