@@ -18,7 +18,6 @@ public class ClientConfig {
 
     private static volatile ClientConfig instance;
     private static final Object LOCK = new Object();
-
     private String merchantId;
     private String secretKey;
     private Environment environment;
@@ -41,17 +40,16 @@ public class ClientConfig {
 
     @SuppressWarnings("ConstantConditions")
     public ClientConfig configure(@NonNull String merchantId, @NonNull String secretKey, @NonNull Environment environment) {
-
-        if (merchantId == null) {
+        if (merchantId == null || merchantId.equals("")) {
             throw new NullPointerException("You must provide a merchant id");
         }
 
-        if (environment == null) {
-            throw new NullPointerException("You must provide an environment");
+        if ((environment == null) || (environment != Environment.PRODUCTION && environment != Environment.SANDBOX)) {
+            throw new NullPointerException("You must provide a valid environment");
         }
 
-        if (secretKey == null) {
-            throw new NullPointerException("You must provide a secret");
+        if (secretKey == null || secretKey.equals("")) {
+            throw new NullPointerException("You must provide a secret key");
         }
 
         this.merchantId = merchantId;

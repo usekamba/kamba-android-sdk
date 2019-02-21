@@ -9,9 +9,11 @@
 package com.usekamba.kamba_payments_sdk;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
@@ -24,23 +26,19 @@ import com.usekamba.kambapaysdk.core.requests.TransactionCallback;
 
 public class MainActivity extends AppCompatActivity {
     private Context context = this;
-    private Button startPayment = null;
     CheckoutRequest checkoutRequest;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        startPayment = findViewById(R.id.start_payment);
-        ClientConfig.getInstance().configure("",
-                "",
+        ClientConfig.getInstance().configure("", "",
                 ClientConfig.Environment.PRODUCTION);
         checkoutRequest = new CheckoutRequest();
         checkoutRequest.setInitialAmount(90);
         checkoutRequest.setNotes("Curso de programação android: Básico");
-        startPayment.setOnClickListener(v -> initKambaTransaction());
+        findViewById(R.id.start_payment).setOnClickListener(v -> initKambaTransaction());
     }
-
-
     private void initKambaTransaction() {
         CheckoutTransaction checkoutTransaction = new CheckoutTransactionBuilder()
                 .addClientConfig(ClientConfig.getInstance())
@@ -49,12 +47,13 @@ public class MainActivity extends AppCompatActivity {
         checkoutTransaction.enqueue(new TransactionCallback() {
             @Override
             public void onSuccess(final CheckoutResponse checkout) {
+
                 runOnUiThread(() -> startActivity(new Intent(context, CheckoutActivity.class).putExtra("checkout", checkout)));
             }
 
             @Override
             public void onFailure(String message) {
-                runOnUiThread(() -> Toast.makeText(context, "Error initiating Payment request: " + message, Toast.LENGTH_LONG).show() );
+                runOnUiThread(() -> Toast.makeText(context, "Error initiating Payment request: " + message, Toast.LENGTH_LONG).show());
             }
         });
     }
