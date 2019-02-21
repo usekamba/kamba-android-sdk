@@ -41,15 +41,15 @@ public class ClientConfig {
     @SuppressWarnings("ConstantConditions")
     public ClientConfig configure(@NonNull String merchantId, @NonNull String secretKey, @NonNull Environment environment) {
         if (merchantId == null || merchantId.equals("")) {
-            throw new NullPointerException("You must provide a merchant id");
+            throw new IllegalStateException("You must provide a merchant id");
         }
 
         if ((environment == null) || (environment != Environment.PRODUCTION && environment != Environment.SANDBOX)) {
-            throw new NullPointerException("You must provide a valid environment");
+            throw new IllegalStateException("You must provide a valid environment");
         }
 
         if (secretKey == null || secretKey.equals("")) {
-            throw new NullPointerException("You must provide a secret key");
+            throw new IllegalStateException("You must provide a secret key");
         }
 
         this.merchantId = merchantId;
