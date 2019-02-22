@@ -1,5 +1,7 @@
 package com.usekamba.kambapaysdk.core.model;
 
+import android.util.Log;
+
 import com.squareup.moshi.Json;
 
 import java.io.Serializable;
@@ -92,7 +94,8 @@ public class CheckoutResponse implements Serializable {
 	}
 
 	public String getQrCode(){
-		return getRedirectUrlSuccess()+"/pay?chID="+getId();
+		Log.d("MainActivity", getRedirectUrlSuccess() + "/pay?chID=" + getId());
+		return getRedirectUrlSuccess() + "/pay?chID=" + getId();
 	}
 
 	public void setInitialAmount(Double initialAmount){

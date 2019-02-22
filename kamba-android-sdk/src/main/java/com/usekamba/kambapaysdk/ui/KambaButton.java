@@ -28,8 +28,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.usekamba.kambapaysdk.R;
+import com.usekamba.kambapaysdk.core.model.BigMoney;
 import com.usekamba.kambapaysdk.core.model.CheckoutResponse;
+import com.usekamba.kambapaysdk.helpers.FourmeKt;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class KambaButton extends RelativeLayout {
@@ -41,6 +44,7 @@ public class KambaButton extends RelativeLayout {
     private static final String TRANSACTION_AMOUNT = "amount";
     private static final String DESCRIPTION = "description";
     private static final String WEBSITE = "https://www.usekamba.com/";
+    private static final String MERCHANT_PAYMENT = "localBusinessPayment";
 
     public KambaButton(Context context) {
         super(context);
@@ -68,11 +72,9 @@ public class KambaButton extends RelativeLayout {
         RelativeLayout mBackground = mRoot.findViewById(R.id.kamba_button_bg);
         TextView mText = mRoot.findViewById(R.id.kamba_button_text);
         ImageView mLogo = mRoot.findViewById(R.id.kamba_logo);
-
         mText.setText(R.string.kamba_res_button_text);
         Typeface font = ResourcesCompat.getFont(context, R.font.montserrat_bold);
         mText.setTypeface(font, Typeface.BOLD);
-
         if (attributes.getBoolean(R.styleable.KambaButton_lightTheme, true)) {
             mBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.button_light_theme));
         } else {
@@ -85,18 +87,15 @@ public class KambaButton extends RelativeLayout {
         if (checkoutResponse != null) {
             PackageManager packageManager = context.getPackageManager();
             Intent walletIntent = new Intent(Intent.ACTION_VIEW);
-            walletIntent.setData(Uri.parse("https://comerciante.usekamba.com"));
+            walletIntent.setData(Uri.parse("https://comerciante.usekamba.com/pay?chID=" + checkoutResponse.getId()));
             List<ResolveInfo> activities = packageManager.queryIntentActivities(walletIntent, 0);
             boolean isIntentSafe = activities.size() > 0;
             if (isIntentSafe) {
-                walletIntent.putExtra(TRANSACTION_IS_MERCHANT, true);
-                walletIntent.putExtra(TRANSACTION_RECEIVER_ID, checkoutResponse.getMerchant().getId());
-                walletIntent.putExtra(TRANSACTION_RECEIVER_FIRST_NAME, checkoutResponse.getMerchant().getBusinessName());
-                walletIntent.putExtra(TRANSACTION_AMOUNT, (checkoutResponse.getTotalAmount()));
+                walletIntent.putExtra(TRANSACTION_AMOUNT, FourmeKt.formatCheckoutAmount(new BigDecimal(checkoutResponse.getTotalAmount())));
+                walletIntent.putExtra(MERCHANT_PAYMENT, true);
                 walletIntent.putExtra(DESCRIPTION, checkoutResponse.getNotes());
                 walletIntent.putExtra(PHONE_NUMBER, checkoutResponse.getMerchant().getPhoneNumber());
                 context.startActivity(walletIntent);
-
             } else {
                 try {
                     walletIntent = new Intent(Intent.ACTION_VIEW);
