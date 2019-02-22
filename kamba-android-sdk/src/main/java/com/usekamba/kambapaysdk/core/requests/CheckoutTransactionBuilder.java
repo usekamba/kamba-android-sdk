@@ -8,7 +8,6 @@
 
 package com.usekamba.kambapaysdk.core.requests;
 
-import android.util.Log;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.usekamba.kambapaysdk.core.HmacSha1;

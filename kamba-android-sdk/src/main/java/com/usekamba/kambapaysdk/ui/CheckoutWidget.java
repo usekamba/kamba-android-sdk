@@ -37,7 +37,6 @@ public class CheckoutWidget extends ConstraintLayout {
 
     public CheckoutWidget(Context context) {
         super(context);
-
     }
 
     public CheckoutWidget(Context context, AttributeSet attrs) {

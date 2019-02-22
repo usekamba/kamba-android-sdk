@@ -25,7 +25,7 @@ public class CheckoutRequest extends RequestBody implements Serializable {
     @Json(name = "notes")
     private String notes;
     @Json(name = "initial_amount")
-    private int initial_amount;
+    private Double initial_amount;
 
     public CheckoutRequest() { }
 
@@ -51,11 +51,11 @@ public class CheckoutRequest extends RequestBody implements Serializable {
         this.notes = notes;
     }
 
-    public int getInitialAmount() {
+    public double getInitialAmount() {
         return initial_amount;
     }
 
-    public void setInitialAmount(int initial_amount) {
+    public void setInitialAmount(double initial_amount) {
         this.initial_amount = initial_amount;
     }
 }
