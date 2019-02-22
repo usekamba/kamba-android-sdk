@@ -92,7 +92,7 @@ public class CheckoutResponse implements Serializable {
 	}
 
 	public String getQrCode(){
-		return getRedirectUrlSuccess()+"/pay?mID="+getMerchant().getId()+"&chID="+getId();
+		return getRedirectUrlSuccess()+"/pay?chID="+getId();
 	}
 
 	public void setInitialAmount(Double initialAmount){

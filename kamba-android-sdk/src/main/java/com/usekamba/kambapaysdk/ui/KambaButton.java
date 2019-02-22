@@ -85,17 +85,18 @@ public class KambaButton extends RelativeLayout {
         if (checkoutResponse != null) {
             PackageManager packageManager = context.getPackageManager();
             Intent walletIntent = new Intent(Intent.ACTION_VIEW);
-            walletIntent.setData(Uri.parse("checkout://com.usekamba"));
+            walletIntent.setData(Uri.parse("https://comerciante.usekamba.com"));
             List<ResolveInfo> activities = packageManager.queryIntentActivities(walletIntent, 0);
             boolean isIntentSafe = activities.size() > 0;
             if (isIntentSafe) {
                 walletIntent.putExtra(TRANSACTION_IS_MERCHANT, true);
                 walletIntent.putExtra(TRANSACTION_RECEIVER_ID, checkoutResponse.getMerchant().getId());
                 walletIntent.putExtra(TRANSACTION_RECEIVER_FIRST_NAME, checkoutResponse.getMerchant().getBusinessName());
-                walletIntent.putExtra(TRANSACTION_AMOUNT, (checkoutResponse.getTotalAmount().intValue()));
+                walletIntent.putExtra(TRANSACTION_AMOUNT, (checkoutResponse.getTotalAmount()));
                 walletIntent.putExtra(DESCRIPTION, checkoutResponse.getNotes());
                 walletIntent.putExtra(PHONE_NUMBER, checkoutResponse.getMerchant().getPhoneNumber());
                 context.startActivity(walletIntent);
+
             } else {
                 try {
                     walletIntent = new Intent(Intent.ACTION_VIEW);

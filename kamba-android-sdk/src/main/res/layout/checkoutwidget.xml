@@ -110,6 +110,7 @@
             android:background="@drawable/security_checked"
             android:backgroundTint="@color/kamba_res_colorPrimary"
             android:cropToPadding="true"
+            android:visibility="invisible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/materialCardView" />
 
@@ -117,14 +118,15 @@
             android:id="@+id/secure_description"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="32dp"
-            android:layout_marginEnd="64dp"
             android:layout_marginStart="8dp"
             android:layout_marginTop="32dp"
+            android:layout_marginEnd="64dp"
+            android:layout_marginBottom="32dp"
             android:fontFamily="@font/roboto"
             android:gravity="center_horizontal|center"
             android:text="Pagamento seguro"
             android:textColor="@color/kamba_rescolorAccent"
+            android:visibility="invisible"
             app:layout_constraintBottom_toTopOf="@+id/checkout_payment_details"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
@@ -174,27 +176,30 @@
             <TableRow
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_weight="1.0"
+                android:layout_weight="2.0"
+                android:animateLayoutChanges="true"
                 android:divider="@color/kamba_reslight_grey">
 
                 <TextView
                     android:id="@+id/checkout_item_description"
                     android:layout_width="match_parent"
                     android:layout_gravity="center"
-                    android:layout_weight=".8"
+                    android:layout_weight="2.0"
                     android:padding="3dip"
                     android:paddingEnd="100dp"
                     android:paddingRight="100dp" />
 
                 <TextView
                     android:id="@+id/checkout_item_amount"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_weight=".6"
                     android:gravity="center"
                     android:padding="3dip"
                     android:textAlignment="textEnd"
                     android:textColor="@android:color/black"
-                    android:textStyle="bold" />
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:visibility="gone" />
 
             </TableRow>
 

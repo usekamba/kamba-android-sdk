@@ -8,36 +8,22 @@
 
 package com.usekamba.kambapaysdk.core.requests;
 
-import android.content.Context;
-import android.content.Intent;
-import android.util.Base64;
 import android.util.Log;
-import android.view.View;
-import android.widget.Toast;
-
-import com.squareup.moshi.Json;
 import com.squareup.moshi.JsonAdapter;
 import com.squareup.moshi.Moshi;
 import com.usekamba.kambapaysdk.core.HmacSha1;
 import com.usekamba.kambapaysdk.core.client.ClientConfig;
+import com.usekamba.kambapaysdk.core.security.Charsets;
 import com.usekamba.kambapaysdk.core.security.binary.Hex;
-import com.usekamba.kambapaysdk.core.security.digest.HmacUtils;
-
+import org.jetbrains.annotations.NotNull;
 import org.joda.time.DateTime;
 import org.joda.time.DateTimeZone;
-import org.json.JSONObject;
-
-import java.math.BigInteger;
-import java.nio.charset.Charset;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.Base64;
 import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
-
-import javax.crypto.Mac;
-import javax.crypto.spec.SecretKeySpec;
-
 import okhttp3.Headers;
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
@@ -49,79 +35,58 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
     private CheckoutRequest checkoutRequest;
     private ClientConfig clientConfig;
     private final Moshi moshi = new Moshi.Builder().build();
-    private final MediaType mediaType = MediaType.parse("application/json");
+    private final MediaType mediaType = MediaType.parse("application/json; charset=utf-8\"");
     private final JsonAdapter<CheckoutRequest> checkoutRequestJsonAdapter = moshi.adapter(CheckoutRequest.class);
     private Request request;
     private String URL;
     private String timeStamp;
 
-
     private void setUpRequestAuthorization(ClientConfig clientConfig) {
         if (clientConfig.getEnvironment() == ClientConfig.Environment.SANDBOX) {
-            RequestBody requestBody = RequestBody.create(mediaType, checkoutRequestJsonAdapter.toJson(checkoutRequest));
             String API_SANDBOX_URL = "https://sandbox.usekamba.com/v1/checkouts";
             URL = API_SANDBOX_URL.replace("/checkouts", "");
-            getTimeStamp();
-            String conanicalString = generateConanicalString(checkoutRequest);
-            byte[] digest = HmacUtils.hmacSha1(conanicalString, clientConfig.getSecretKey());
-            Log.d("MainActivity", digest.toString());
-            Request.Builder builder = new Request.Builder();
-            Headers a = new Headers.Builder()
-                    .add("Content-Type", "application/json;charset=utf-8")
-                    .add("Signature", timeStamp + "." + digest.toString())
-                    .build();
-            builder.url(API_SANDBOX_URL);
-            builder.headers(a);
-            builder.post(requestBody);
-            request = builder.build();
+            String signature = generateSignature(clientConfig);
+            buildRequest(clientConfig, API_SANDBOX_URL, signature);
         } else {
-            RequestBody requestBody = RequestBody.create(mediaType, checkoutRequestJsonAdapter.toJson(checkoutRequest));
             String API_PRODUCTION_URL = "https://api.usekamba.com/v1/checkouts";
             URL = API_PRODUCTION_URL.replace("/checkouts", "");
-            String conanicalString = generateConanicalString(checkoutRequest);
-            HmacSha1 sha1 = new HmacSha1();
-            byte[] digest = sha1.computeHmac(conanicalString, clientConfig.getSecretKey());
-            String base64Digest = Base64.encodeToString(digest, Base64.DEFAULT);
-            Log.d("MainActivity", base64Digest);
-            String signature = timeStamp + "." + base64Digest;
-            Log.d("MainActivity", "Signature: " + signature);
-            Request.Builder builder = new Request.Builder();
-            Map<String, String> headers = new HashMap<>();
-            headers.put("Merchant-ID", clientConfig.getMerchantId());
-            headers.put("Content-Type", "application/json");
-            headers.put("Signature", signature);
-            Headers.of(headers);
-            builder.url(API_PRODUCTION_URL);
-            builder.headers(Headers.of(headers));
-            builder.post(requestBody);
-            request = builder.build();
+            String signature = generateSignature(clientConfig);
+            buildRequest(clientConfig,API_PRODUCTION_URL, signature);
         }
     }
 
-    public void getTimeStamp() {
+    private void buildRequest(ClientConfig clientConfig, String API_PRODUCTION_URL, String signature) {
+        RequestBody requestBody = RequestBody.create(mediaType, checkoutRequestJsonAdapter.toJson(checkoutRequest));
+        Request.Builder builder = new Request.Builder();
+        Map<String, String> headers = new HashMap<>();
+        headers.put("Merchant-ID", clientConfig.getMerchantId());
+        headers.put("Content-Type", "application/json");
+        headers.put("Signature", signature);
+        Headers.of(headers);
+        builder.url(API_PRODUCTION_URL);
+        builder.headers(Headers.of(headers));
+        builder.post(requestBody);
+        request = builder.build();
+    }
+
+    @NotNull
+    private String generateSignature(ClientConfig clientConfig) {
+        String conanicalString = generateConanicalString(checkoutRequest);
+        String digest = HmacSha1.hmacSha1(clientConfig.getSecretKey(), conanicalString);
+        String hex;
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.O) {
+            hex = Base64.getEncoder().encodeToString(digest.getBytes());
+        } else{
+           hex = android.util.Base64.encodeToString(digest.getBytes(), android.util.Base64.DEFAULT);
+        }
+        return timeStamp + "." + hex.replace("\n", "");
+    }
+
+    private void getTimeStamp() {
         this.timeStamp = DateTime.now(DateTimeZone.UTC).toString("EEE, dd MMM yyyy HH:mm:ss 'GMT'", Locale.US);
-        Log.d("MainActivity", timeStamp);
     }
 
-    private String hmacSha1(String conanicalString, String secretKey) {
-        String result = null;
-        try {
-            byte[] keyBytes = secretKey.getBytes();
-            SecretKeySpec signingKey = new SecretKeySpec(keyBytes, "HmacSHA1");
-            Mac mac = Mac.getInstance("HmacSHA1");
-            mac.init(signingKey);
-            byte[] rawHmac = mac.doFinal(conanicalString.getBytes());
-            byte[] hexBytes = new Hex().encode(rawHmac);
-            result = new String(hexBytes, "ISO-8859-1");
-            Log.d("MainActivity", "MAC : " + result);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        return result;
-    }
-
-    public String createDigest(String body) {
+    private String createDigest(String body) {
         MessageDigest messageDigest = null;
         try {
             messageDigest = MessageDigest.getInstance("MD5");
@@ -129,35 +94,14 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
             e.printStackTrace();
         }
         messageDigest.reset();
-        messageDigest.update(body.getBytes(Charset.forName("UTF8")));
+        messageDigest.update(body.getBytes(Charsets.UTF_8));
         final byte[] resultByte = messageDigest.digest();
-        final String result = new String(Hex.encodeHex(resultByte));
+        final String result = Hex.encodeHexString(resultByte);
         return result;
     }
 
-    public static String md5(String input) {
-        String result = input;
-        if (input != null) {
-            MessageDigest md = null;
-            try {
-                md = MessageDigest.getInstance("MD5");
-            } catch (NoSuchAlgorithmException e) {
-                e.printStackTrace();
-            }
-            md.update(input.getBytes());
-            BigInteger hash = new BigInteger(1, md.digest());
-            result = hash.toString(16);
-            while (result.length() < 32) {
-                result = "0" + result;
-            }
-        }
-        return result;
-    }
-
-    public String generateConanicalString(CheckoutRequest checkoutRequest) {
+    private String generateConanicalString(CheckoutRequest checkoutRequest) {
         getTimeStamp();
-        Log.d("MainActivity", checkoutRequestJsonAdapter.toString());
-        Log.d("MainActivity", "POST,application/json," + createDigest(checkoutRequestJsonAdapter.toJson(checkoutRequest)) + ",/v1/checkouts," + timeStamp);
         return "POST,application/json," + createDigest(checkoutRequestJsonAdapter.toJson(checkoutRequest)) + ",/v1/checkouts," + timeStamp;
     }
 
@@ -175,13 +119,10 @@ public class CheckoutTransactionBuilder implements Transaction.TransactionBuilde
 
     @Override
     public CheckoutTransaction build() {
-
             setUpRequestAuthorization(clientConfig);
-            // this.checkoutRequest.setRedirectUrlSuccess(URL);
             CheckoutTransaction transaction = new CheckoutTransaction();
             transaction.setClient(client);
             transaction.setRequest(request);
             return transaction;
-
     }
 }

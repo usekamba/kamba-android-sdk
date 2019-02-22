@@ -32,13 +32,13 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ClientConfig.getInstance().configure("", "",
-                ClientConfig.Environment.PRODUCTION);
+        ClientConfig.getInstance().configure("", "", ClientConfig.Environment.PRODUCTION);
         checkoutRequest = new CheckoutRequest();
-        checkoutRequest.setInitialAmount(90);
-        checkoutRequest.setNotes("Curso de programação android: Básico");
+        checkoutRequest.setInitialAmount(28999);
+        checkoutRequest.setNotes("Serviço de hospedagem - Plano Mais");
         findViewById(R.id.start_payment).setOnClickListener(v -> initKambaTransaction());
     }
+
     private void initKambaTransaction() {
         CheckoutTransaction checkoutTransaction = new CheckoutTransactionBuilder()
                 .addClientConfig(ClientConfig.getInstance())
@@ -47,7 +47,6 @@ public class MainActivity extends AppCompatActivity {
         checkoutTransaction.enqueue(new TransactionCallback() {
             @Override
             public void onSuccess(final CheckoutResponse checkout) {
-
                 runOnUiThread(() -> startActivity(new Intent(context, CheckoutActivity.class).putExtra("checkout", checkout)));
             }
 

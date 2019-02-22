@@ -51,8 +51,6 @@ public class CheckoutTransaction {
             @Override
             public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                 if (response.code() == 201) {
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.message());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + checkoutResponseJsonAdapter.fromJson(response.body().string()));
                     callback.onSuccess( checkoutResponseJsonAdapter.fromJson(response.body().string()));
                 }
                 if (response.code() == 422) {
@@ -65,13 +63,6 @@ public class CheckoutTransaction {
 
                 if (response.code() == 403) {
                     Log.d(TAG, "KAMBA ANDROID SDK: " + response.message());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.body().string());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().headers());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().method());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().url());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().header("Signature"));
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().header("Authorization"));
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().header("Content-Type"));
                     callback.onFailure("Signature is Invalid");
                 }
             }

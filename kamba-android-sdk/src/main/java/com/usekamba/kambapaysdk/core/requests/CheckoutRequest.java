@@ -19,9 +19,9 @@ import okio.BufferedSink;
 
 public class CheckoutRequest extends RequestBody implements Serializable {
     @Json(name = "channel")
-    private final String channel = "WEB";
+    private final String channel = "ANDROID";
     @Json(name = "redirect_url_success")
-    private String redirect_url_success = "https://usekamba.com";
+    private String redirect_url_success = "https://comerciante.usekamba.com/";
     @Json(name = "notes")
     private String notes;
     @Json(name = "initial_amount")

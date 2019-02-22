@@ -152,7 +152,7 @@ public class Hex implements BinaryEncoder, BinaryDecoder {
      * @return A char[] containing hexadecimal characters in the selected case
      * @since 1.4
      */
-    public static char[] encodeHex(final byte[] data, final boolean toLowerCase) {
+    private static char[] encodeHex(final byte[] data, final boolean toLowerCase) {
         return encodeHex(data, toLowerCase ? DIGITS_LOWER : DIGITS_UPPER);
     }
 
