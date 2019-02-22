@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  ~ Copyright (C) UseKamba Ltda - All Rights Reserved
+  ~ Copyright (C) Usekamba LDA - All Rights Reserved
   ~ Unauthorized copying of this file, via any medium is strictly prohibited
-  ~ Proprietary and confidential and will be punished by law
+  ~ Proprietary and confidential
   ~ Written by Alexandre Antonio Juca <corextechnologies@gmail.com>
-  ~
   -->
 
 <selector xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android" tools:ignore="ResourceName">
-    <item android:state_pressed="true" android:drawable="@drawable/rect_pressed_light_theme"/>
-    <item android:drawable="@drawable/rect_normal_light_theme"/>
+    <item android:state_pressed="true" android:drawable="@drawable/kamba_res_rect_pressed"/>
+    <item android:drawable="@drawable/kamba_res_rect_normal"/>
 </selector>

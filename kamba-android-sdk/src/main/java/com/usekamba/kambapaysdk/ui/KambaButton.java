@@ -28,7 +28,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.usekamba.kambapaysdk.R;
-import com.usekamba.kambapaysdk.core.model.BigMoney;
 import com.usekamba.kambapaysdk.core.model.CheckoutResponse;
 import com.usekamba.kambapaysdk.helpers.FourmeKt;
 
@@ -67,7 +66,7 @@ public class KambaButton extends RelativeLayout {
     }
 
     private void init(Context context, AttributeSet attrs) {
-        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.KambaButton);
+        TypedArray attributes = context.obtainStyledAttributes(attrs, R.styleable.kamba_res_KambaButton);
         View mRoot = inflate(context, R.layout.button, this);
         RelativeLayout mBackground = mRoot.findViewById(R.id.kamba_button_bg);
         TextView mText = mRoot.findViewById(R.id.kamba_button_text);
@@ -75,10 +74,10 @@ public class KambaButton extends RelativeLayout {
         mText.setText(R.string.kamba_res_button_text);
         Typeface font = ResourcesCompat.getFont(context, R.font.montserrat_bold);
         mText.setTypeface(font, Typeface.BOLD);
-        if (attributes.getBoolean(R.styleable.KambaButton_lightTheme, true)) {
-            mBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.button_light_theme));
+        if (attributes.getBoolean(R.styleable.kamba_res_KambaButton_lightTheme, true)) {
+            mBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.kamba_res_button_light_theme));
         } else {
-            mBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.button));
+            mBackground.setBackground(ContextCompat.getDrawable(context, R.drawable.kamba_res_button));
         }
         attributes.recycle();
     }
