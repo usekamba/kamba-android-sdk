@@ -12,21 +12,20 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class HmacSha1 {
 
-    public static String hmacSha1(String KEY, String VALUE) {
-        return hmacSha(KEY, VALUE, "HmacSHA1");
+    public static String hmacSha1(String secret, String value) {
+        return hmacSha(secret, value, "HmacSHA1");
     }
 
-    public static String hmacSha256(String KEY, String VALUE) {
-        return hmacSha(KEY, VALUE, "HmacSHA256");
+    public static String hmacSha256(String secret, String value) {
+        return hmacSha(secret, value, "HmacSHA256");
     }
 
-    private static String hmacSha(String KEY, String VALUE, String SHA_TYPE) {
+    private static String hmacSha(String secret, String value, String shaType) {
         try {
-            SecretKeySpec signingKey = new SecretKeySpec(KEY.getBytes("UTF-8"), SHA_TYPE);
-            Mac mac = Mac.getInstance(SHA_TYPE);
+            SecretKeySpec signingKey = new SecretKeySpec(secret.getBytes("UTF-8"), shaType);
+            Mac mac = Mac.getInstance(shaType);
             mac.init(signingKey);
-            byte[] rawHmac = mac.doFinal(VALUE.getBytes("UTF-8"));
-
+            byte[] rawHmac = mac.doFinal(value.getBytes("UTF-8"));
             byte[] hexArray = {
                     (byte)'0', (byte)'1', (byte)'2', (byte)'3',
                     (byte)'4', (byte)'5', (byte)'6', (byte)'7',
