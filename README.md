@@ -50,7 +50,7 @@ allprojects {
 ```
 dependencies
 {
-	implementation 'com.github.usekamba:kamba-android-sdk:v1.0.3'
+	implementation 'com.github.usekamba:kamba-android-sdk:v1.0.4'
 }
 ```
 
@@ -226,10 +226,17 @@ Exemplo:
 
 ## Histórico de versões
 ``` 0.9.3: Melhorias e correção de bugs - 07/07/2018 ``` <br/>
+
 ``` 0.9.4: Melhorias e correção de bugs - 20/08/2018 ``` <br/>
+
 ``` 1.0.0: Melhoras para reflectir mudanças feitas na API - 03/10/2018 ``` <br/>
+
 ``` 1.0.1: Corrigimos o bug que causava uma execção ao gerar o código QR do CheckoutWidget - 04/10/2018 ``` <br/>
+
 ``` 1.0.2: Adicionar suporte para temas ao botão Kamba - 09/10/2018 ``` <br/>
+
 ``` 1.0.3: Implementamos hmac para asegurar transações e o checkout usando a função de dispersão criptográfica SHA1``` <br/>
+
+``` 1.0.4: Corrigir conflictos em recursos/assets```
 
 © 2018 Soluções de Pagamento. Todos os direitos reservados. USEKAMBA, LDA. - Rua Avenida Manuel Vandunem, Ingombotas - Luanda - Angola
