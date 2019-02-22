@@ -62,7 +62,7 @@ dependencies
 É importante configurar suas credenciais para que nossos sistemas possam autenticar suas solicitações de pagamento.
 Normalmente, você fará isso na `Activity` que exibirá o método de pagamento para seu aplicativo. Este código será executado após o usuário selecionar a opção de pagamento `Pagar com o Kamba`.
 
-**NOTA:** Durante a fase de desenvolvimento será necessário usar o sdk em ambiente SANDBOX.
+**NOTA:** Durante a fase de desenvolvimento deve-se usar o sdk em ambiente SANDBOX.
 ```java
 ClientConfig.getInstance().configure("SEU_MERCHAND_ID", "SUA_CHAVE_SECRETA", ClientConfig.Environment.SANDBOX);
 ```
@@ -71,15 +71,15 @@ ClientConfig.getInstance().configure("SEU_MERCHAND_ID", "SUA_CHAVE_SECRETA", Cli
 | Atributo        | Descrição         |
 | ------------- |:-------------:|
 | `enironment`      | O campo `environment` define qual ambiente poderá ser usado. Durante a fase de desenvolvimento deve-se usar o ambiente ```ClientConfig.Environment.SANDBOX``` e quando estiver pronto para produção deve-se usar ```ClientConfig.Environment.PRODUCTION```.  |
-| `merchant_id`       | Use o `merchant_id` (ID de comerciante) que copiou do seu painel de comerciante para substituir o valor do campo `merchant_id`. Recomenda-se usar variáveis de ambiente sempre, e não deve ser compartilhada ou exposta em sua página html. **O ID de comerciante da API para sandbox e production são diferentes.     |
-| `secret_key`        | Campo `secret_key` é a chave secreta usado para geração de assinaturas para permitir que seus clientes pagam em segurança|
+| `merchantId`       | Use o `merchantId` (ID de comerciante) que copiou do seu painel de comerciante para substituir o valor do campo `merchantId`. Recomenda-se usar variáveis de ambiente sempre, e não deve ser compartilhada ou exposta em sua página html. **O ID de comerciante da API para sandbox e production são diferentes.     |
+| `secretKey`        | Campo `secretkey` é a `chave secreta` usado para geração de assinaturas para permitir que seus clientes pagam em ***segurança***|
 
 **Configurações do `CheckoutRequest`:**
 
 | Atributo        | Descrição         |
 | ------------- |:-------------:|
-|`initial_amount`|`initial_amount`, este campo recebe o preço do produto ou serviço a ser comercializado.|
-|`notes`|Substitua o valor do campo `notes` por uma anotação ou descrição geral a cerca do pagamento.|
+|`initialAmount`| Este campo recebe o preço do produto ou serviço a ser comercializado. <br/>eg. ```checkoutRequest.setInitialAmount(28999);```|
+|`notes`|Substitua o valor do campo `notes` por uma anotação ou descrição geral a cerca do pagamento.<br/>```checkoutRequest.setNotes("Serviço de hospedagem - Plano Mais");```|
 
  ## Geração de assinaturas
 
@@ -98,7 +98,6 @@ As ferramentas atuais permitem que você use nossos componentes de UI como **Bot
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 </com.usekamba.kambapaysdk.ui.CheckoutWidget>
-
 ```
 
 Também criamos um botão de Pagamento para que seus clientes cliquem para aceitar pagamentos via Carteira. Clicar neste botão abrirá a Carteira do cliente para finalizar o pagamento.
@@ -119,10 +118,9 @@ Crie uma instância do objeto `CheckoutRequest` que representa o item que seu cl
 ```java
 public class MerchantActivity extends AppCompatActivity {
     ...
-
     checkoutRequest = new CheckoutRequest();
-    checkoutRequest.setInitialAmount(25600);
-    checkoutRequest.setNotes("Curso de programação android: Básico");
+    checkoutRequest.setInitialAmount(28999);
+    checkoutRequest.setNotes("Serviço de hospedagem - Plano Mais");
     CheckoutTransaction checkoutTransaction = new CheckoutTransactionBuilder()
                 .addClientConfig(ClientConfig.getInstance())
                 .addCheckoutRequest(checkoutRequest)
@@ -173,9 +171,8 @@ public class CheckoutActivity extends AppCompatActivity {
 }
 ```
 
-**IMPORTANTE:** Se tudo está funcionando bem em modo SANDBOX e o seu aplicativo está pronto para RELEASE altera o 
-ambiente para production e certifica que estejas a usar a CHAVE_DE_API e MERCHANT_ID para PRODUCTION.
-sdk em ambiente SANDBOX.
+**IMPORTANTE:** Se tudo está funcionando bem em modo SANDBOX e o seu aplicativo está pronto para RELEASE (Lançamento) altera o 
+ambiente para production e certifica que estejas a usar a CHAVE_SECRETA e MERCHANT_ID para PRODUCTION.
 ```java
 ClientConfig.getInstance().configure("SEU_MERCHAND_ID", "SUA_CHAVE_SECRETA", ClientConfig.Environment.PRODUCTION);
 ```
