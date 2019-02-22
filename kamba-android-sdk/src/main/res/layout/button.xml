@@ -17,7 +17,7 @@
         android:id="@+id/kamba_button_bg"
         android:layout_width="match_parent"
         android:layout_height="52dp"
-        android:background="@drawable/button"
+        android:background="@drawable/kamba_res_button"
         android:foreground="?attr/selectableItemBackground"
         android:padding="8dp">
 

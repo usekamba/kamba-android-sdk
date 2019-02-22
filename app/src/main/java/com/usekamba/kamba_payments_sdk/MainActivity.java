@@ -32,9 +32,10 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ClientConfig.getInstance().configure("", "", ClientConfig.Environment.PRODUCTION);
+        ClientConfig.getInstance().configure("8f74aff4-1821-4ad7-9d51-7cf3a303743a",
+                "D4P2HM+35xby+2Ajm0+3FNcD1HF1RGptPp7UqnNgLl8=", ClientConfig.Environment.PRODUCTION);
         checkoutRequest = new CheckoutRequest();
-        checkoutRequest.setInitialAmount(10.99);
+        checkoutRequest.setInitialAmount(19.99);
         checkoutRequest.setNotes("Serviço de hospedagem - Plano Grande");
         findViewById(R.id.start_payment).setOnClickListener(v -> initKambaTransaction());
     }
