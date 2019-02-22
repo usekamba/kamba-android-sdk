@@ -63,13 +63,6 @@ public class CheckoutTransaction {
 
                 if (response.code() == 403) {
                     Log.d(TAG, "KAMBA ANDROID SDK: " + response.message());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.body().string());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().headers());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().method());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().url());
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().header("Signature"));
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().header("Authorization"));
-                    Log.d(TAG, "KAMBA ANDROID SDK: " + response.request().header("Content-Type"));
                     callback.onFailure("Signature is Invalid");
                 }
             }
