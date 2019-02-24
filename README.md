@@ -50,7 +50,7 @@ allprojects {
 ```
 dependencies
 {
-	implementation 'com.github.usekamba:kamba-android-sdk:v1.0.4'
+	implementation 'com.github.usekamba:kamba-android-sdk:v1.0.5'
 }
 ```
 
@@ -62,9 +62,20 @@ dependencies
 É importante configurar suas credenciais para que nossos sistemas possam autenticar suas solicitações de pagamento.
 Normalmente, você fará isso na `Activity` que exibirá o método de pagamento para seu aplicativo. Este código será executado após o usuário selecionar a opção de pagamento `Pagar com o Kamba`.
 
-**NOTA:** Durante a fase de desenvolvimento deve-se usar o sdk em ambiente SANDBOX.
+**NOTA:** 
+1) Durante a fase de desenvolvimento deve-se usar o sdk em ambiente SANDBOX.
+
+2) Recomendamos que crie uma classe que seja sub-classe da classe Application e chama o ``ClientConfig.getInstance().configure()`` no metódo ``onCreate()``
+
 ```java
-ClientConfig.getInstance().configure("SEU_MERCHAND_ID", "SUA_CHAVE_SECRETA", ClientConfig.Environment.SANDBOX);
+
+public class DemoApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        ClientConfig.getInstance().configure("SEU_MERCHAND_ID", "SUA_CHAVE_SECRETA", ClientConfig.Environment.SANDBOX);
+    }
+}
 ```
 **Configurações do `CLientConfig`:**
 
@@ -149,12 +160,12 @@ public class CheckoutActivity extends AppCompatActivity {
     private CheckoutWidget checkoutWidget;
     private CheckoutResponse checkoutResponse;
     private KambaButton payButton;
-    ...
-
+    private Context context = this;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_checkout);
+
         checkoutWidget = findViewById(R.id.checkout);
         payButton = findViewById(R.id.pay);
         // Para acessar o checkout response da tela anterior usa sempre response "(CheckoutResponse) getIntent().getSerializableExtra("checkout");
@@ -165,8 +176,25 @@ public class CheckoutActivity extends AppCompatActivity {
         checkoutWidget.setItemDescription(checkoutResponse.getNotes());
         checkoutWidget.setItemAmount(checkoutResponse.getInitialAmount());
         checkoutWidget.setQrCode(checkoutResponse.getQrCode());
+        payButton.setOnPaymentListener(new PaymentResultListener() {
+            @Override
+            public void onSuccessfulPayment() {
+                Toast.makeText(context, "Purchase Made", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(context, "Purchase not performed", Toast.LENGTH_SHORT).show();
+            }
+        });
         payButton.setOnClickListener(v -> payButton.payWithWallet(checkoutResponse, context));
-    
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        payButton.onActivityResult(requestCode, resultCode, data);
     }
 }
 ```
@@ -235,8 +263,10 @@ Exemplo:
 
 ``` 1.0.2: Adicionar suporte para temas ao botão Kamba - 09/10/2018 ``` <br/>
 
-``` 1.0.3: Implementamos hmac para asegurar transações e o checkout usando a função de dispersão criptográfica SHA1``` <br/>
+``` 1.0.3: Implementamos hmac para asegurar transações e o checkout usando a função de dispersão criptográfica SHA1 - 22/02/2019``` <br/>
 
-``` 1.0.4: Corrigir conflictos em recursos/assets```
+``` 1.0.4: Corrigidos conflictos em recursos/assets - 22/02/2019 ``` <br/>
+
+``` 1.0.5: Adicionamos suporte para callbacks para saber se um pagamento foi feito com sucesso ou não. - 24/02/2019 ``` <br/>
 
 © 2018 Soluções de Pagamento. Todos os direitos reservados. USEKAMBA, LDA. - Rua Avenida Manuel Vandunem, Ingombotas - Luanda - Angola
