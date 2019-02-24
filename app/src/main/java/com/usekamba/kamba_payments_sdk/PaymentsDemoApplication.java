@@ -8,9 +8,6 @@ public class PaymentsDemoApplication extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        ClientConfig.getInstance()
-                .configure("",
-                        "",
-                        ClientConfig.Environment.PRODUCTION);
+        ClientConfig.getInstance().configure("", "", ClientConfig.Environment.PRODUCTION);
     }
 }
