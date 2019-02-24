@@ -9,12 +9,16 @@
 package com.usekamba.kamba_payments_sdk;
 
 import android.content.Context;
+import android.content.Intent;
+import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.usekamba.kambapaysdk.core.model.CheckoutResponse;
 import com.usekamba.kambapaysdk.ui.CheckoutWidget;
 import com.usekamba.kambapaysdk.ui.KambaButton;
+import com.usekamba.kambapaysdk.ui.PaymentResultListener;
 
 public class CheckoutActivity extends AppCompatActivity {
     private CheckoutWidget checkoutWidget;
@@ -36,6 +40,24 @@ public class CheckoutActivity extends AppCompatActivity {
         checkoutWidget.setItemDescription(checkoutResponse.getNotes());
         checkoutWidget.setItemAmount(checkoutResponse.getInitialAmount());
         checkoutWidget.setQrCode(checkoutResponse.getQrCode());
+        payButton.setOnPaymentListener(new PaymentResultListener() {
+            @Override
+            public void onSuccessfulPayment() {
+                Toast.makeText(context, "Purchase Made", Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onFailure() {
+                Toast.makeText(context, "Purchase not performed", Toast.LENGTH_SHORT).show();
+            }
+        });
         payButton.setOnClickListener(v -> payButton.payWithWallet(checkoutResponse, context));
+
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        payButton.onActivityResult(requestCode, resultCode, data);
     }
 }
